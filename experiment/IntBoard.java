@@ -58,7 +58,6 @@ public class IntBoard {
 		for(int i = 0; i < visited.length; i++){
 			visited[i] = false;
 		}
-		System.out.println(index);
 		calcTargets(index,numSteps);
 		
 		
@@ -70,10 +69,13 @@ public class IntBoard {
 		visited[thisCell] = true;
 
 			for(int i = 0; i < tempo.size(); i++){
-				if(visited[tempo.get(i)]==true)
+				if(visited[tempo.get(i)]==true){
+					System.out.println(tempo.get(i));
 					tempo.remove(i);
+				}
 			}
 			for(int i = 0; i < tempo.size(); i++){
+				System.out.println(tempo.get(i));
 				visited[tempo.get(i)] = true;
 				if(numSteps == 1){
 					targets.add(tempo.get(i));
