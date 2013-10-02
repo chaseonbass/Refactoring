@@ -6,6 +6,7 @@ import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.Map;
 import java.util.Set;
+import java.util.TreeSet;
 
 public class IntBoard {
 	private int row, column, index;
@@ -57,33 +58,48 @@ public class IntBoard {
 		for(int i = 0; i < visited.length; i++){
 			visited[i] = false;
 		}
-		
+		System.out.println(index);
 		calcTargets(index,numSteps);
+		
 		
 	}
 	
 	public void calcTargets(int thisCell, int numSteps){
 		tempo = adjList.get(thisCell);
 		int oldSize = tempo.size();
-		if(numSteps > 1){
-			visited[thisCell] = true;
+		visited[thisCell] = true;
 
-			for(int i = 0; i < oldSize; i++){
-				if(visited[tempo.get(i)] == true){
+			for(int i = 0; i < tempo.size(); i++){
+				if(visited[tempo.get(i)]==true)
 					tempo.remove(i);
+			}
+			for(int i = 0; i < tempo.size(); i++){
+				visited[tempo.get(i)] = true;
+				if(numSteps == 1){
+					targets.add(tempo.get(i));
 				}
-				else
+				else{
 					calcTargets(tempo.get(i), numSteps--);
+				}
+				visited[tempo.get(i)] = false;
+			}
+			
+		/*if(numSteps > 1){
+			for(int i = 0; i < tempo.size(); i++){
+				if(visited[tempo.get(i)] == false){
+					calcTargets(tempo.get(i), numSteps--);
+				}
 			}
 		}
 		else{
 			targets = new HashSet<Integer>();
 			for(int i = 0; i < oldSize; i++){
 					targets.add(tempo.get(i));
-				}
+					System.out.println(tempo.get(i));
+				}*/
 				
 			
-		}
+		//}
 
 /*		adjMtx.get(visited);
 		for (){
