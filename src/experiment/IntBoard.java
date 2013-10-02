@@ -50,11 +50,27 @@ public class IntBoard {
 	}
 	public void startTargets(int index, int numSteps){
 		
+		visited.equals(false);
 		
+		calcAdjacencies();
+		
+		visited[index]= true;
+		calcTargets(index, numSteps);
 		
 	}
 	
 	public void calcTargets(int thisCell, int numSteps){
+		adjMtx.get(visited);
+		for (){
+			visited[adjCell] = true;
+			if(numSteps ==1)
+				Targets.add(adjCell);
+			else
+				calcTargets(adjCell, numSteps--);
+			visited[adjCell] = false;
+			
+			
+		}
 		
 	}
 	public Set<Integer> getTargets(){
