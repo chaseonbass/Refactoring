@@ -67,24 +67,22 @@ public class IntBoard {
 		
 	}
 	public void calcTargets(int thisCell, int numSteps){
-		tempo = adjList.get(thisCell);
+		tempo = adjList.get(thisCell);  // tempo is a LinkedList<Integer>
 		for(int i = 0; i < tempo.size(); i++){
 			if(visited[tempo.get(i)] == true){
-				tempo.remove(i);
+				tempo.remove(i);             // if visited is true, remove this guy from tempo
 			}
 		}
 		for(int i = 0; i < tempo.size(); i++){
-			visited[tempo.get(i)] = true;
+			visited[tempo.get(i)] = true;    // set adjCell = true
 			if(numSteps == 1){
-				targets.add(tempo.get(i));
+				targets.add(tempo.get(i));		//add each adjCell to targets
 			}
-			else
-				calcTargets(tempo.get(i),numSteps--);
-			visited[tempo.get(i)] = false;
+			else{
+				calcTargets(tempo.get(i),(numSteps-1));   //recursive call
+			}
+			visited[tempo.get(i)] = false;    //visited[adjCell] = false
 		}
-		
-		
-		
 		
 	}
 	
