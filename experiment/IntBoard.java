@@ -47,44 +47,69 @@ public class IntBoard {
 				if(column != maxColumns -1)
 					indexAdjacencies.add(index+1);
 				index++;
+				
 				adjList.add(indexAdjacencies);
 			}
 		}
 		
 	}
 	public void startTargets(int index, int numSteps){
-		
+		calcAdjacencies();
 		visited = new boolean[adjList.size()];
 		for(int i = 0; i < visited.length; i++){
 			visited[i] = false;
 		}
+		targets = new HashSet<Integer>();
+		visited[index] = true;
+	
 		calcTargets(index,numSteps);
 		
 		
 	}
-	
 	public void calcTargets(int thisCell, int numSteps){
+		tempo = adjList.get(thisCell);
+		for(int i = 0; i < tempo.size(); i++){
+			if(visited[tempo.get(i)] == true){
+				tempo.remove(i);
+			}
+		}
+		for(int i = 0; i < tempo.size(); i++){
+			visited[tempo.get(i)] = true;
+			if(numSteps == 1){
+				targets.add(tempo.get(i));
+			}
+			else
+				calcTargets(tempo.get(i),numSteps--);
+			visited[tempo.get(i)] = false;
+		}
+		
+		
+		
+		
+	}
+	
+	public void calcTargetsfucked(int thisCell, int numSteps){
+		System.out.println(thisCell);
 		tempo = adjList.get(thisCell);
 		int oldSize = tempo.size();
 		visited[thisCell] = true;
 
 			for(int i = 0; i < tempo.size(); i++){
 				if(visited[tempo.get(i)]==true){
-					System.out.println(tempo.get(i));
 					tempo.remove(i);
 				}
 			}
 			for(int i = 0; i < tempo.size(); i++){
-				System.out.println(tempo.get(i));
-				visited[tempo.get(i)] = true;
 				if(numSteps == 1){
-					targets.add(tempo.get(i));
+					targets.add(tempo.get(i));  //adds list of adjacencies for the cell to targets
+					System.out.println(targets);
 				}
 				else{
 					calcTargets(tempo.get(i), numSteps--);
 				}
 				visited[tempo.get(i)] = false;
 			}
+		
 			
 		/*if(numSteps > 1){
 			for(int i = 0; i < tempo.size(); i++){
