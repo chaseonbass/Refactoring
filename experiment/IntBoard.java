@@ -12,7 +12,7 @@ public class IntBoard {
 	private LinkedList<LinkedList> adjList = new LinkedList<LinkedList>();
 	//ArrayList<ArrayList<Integer>> adjacencyList = new ArrayList<ArrayList<Integer>>();
 	private Map<Integer, LinkedList<Integer>> adjMtx;
-	private Set<Integer> targets;
+	private Set<Integer> targets = new HashSet<Integer>();
 	private LinkedList<Integer> tempo = new LinkedList<Integer>();
 	
 	private boolean[] visited;
@@ -33,7 +33,7 @@ public class IntBoard {
 		column = 0;
 		for(row = 0; row < maxRows; row++){
 			for(column = 0; column < maxColumns; column++){
-				LinkedList indexAdjacencies = new LinkedList();
+				LinkedList <Integer> indexAdjacencies = new <Integer> LinkedList();
 				if(row != 0)
 					indexAdjacencies.add(index-maxColumns);
 				
@@ -57,33 +57,38 @@ public class IntBoard {
 		for(int i = 0; i < visited.length; i++){
 			visited[i] = false;
 		}
-		
+		calcAdjacencies();
 		calcTargets(index,numSteps);
+		
 		
 	}
 	
 	public void calcTargets(int thisCell, int numSteps){
 		tempo = adjList.get(thisCell);
 		int oldSize = tempo.size();
+		visited[thisCell] = true;
 		if(numSteps > 1){
-			visited[thisCell] = true;
 
-			for(int i = 0; i < oldSize; i++){
+			for(int i = 0; i < tempo.size(); i++){
+				System.out.println(tempo.get(i));
 				if(visited[tempo.get(i)] == true){
 					tempo.remove(i);
 				}
-				else
+				else{
 					calcTargets(tempo.get(i), numSteps--);
+					visited[thisCell] = false;
+				}
 			}
 		}
 		else{
-			targets = new HashSet<Integer>();
-			for(int i = 0; i < oldSize; i++){
+			for(int i = 0; i < tempo.size(); i++){
 					targets.add(tempo.get(i));
+					System.out.println(targets);
 				}
 				
 			
 		}
+		//visited[thisCell] = false;
 
 /*		adjMtx.get(visited);
 		for (){

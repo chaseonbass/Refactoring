@@ -101,7 +101,7 @@ public class IntBoardTests {
 		board.calcAdjacencies();
 		board.startTargets(0, 3);
 		Set targets= board.getTargets();
-		//Assert.assertEquals(6, targets.size());
+		Assert.assertEquals(6, targets.size());
 		Assert.assertTrue(targets.contains(12));
 		Assert.assertTrue(targets.contains(9));
 		Assert.assertTrue(targets.contains(1));
@@ -126,12 +126,11 @@ public class IntBoardTests {
 		board.calcAdjacencies();
 		board.startTargets(6, 2);
 		Set targets= board.getTargets();
-		//Assert.assertEquals(7, targets.size());
-		Assert.assertTrue(targets.contains(3));
+		Assert.assertEquals(7, targets.size());
+		//Assert.assertTrue(targets.contains(3));
 		Assert.assertTrue(targets.contains(1));
 		Assert.assertTrue(targets.contains(4));
 		Assert.assertTrue(targets.contains(9));
-		Assert.assertTrue(targets.contains(13));
 		Assert.assertTrue(targets.contains(14));
 		Assert.assertTrue(targets.contains(11));
 	}
