@@ -48,7 +48,13 @@ public class IntBoard {
 		}
 		
 	}
-	public void startTargets(int index, int steps){
+	public void startTargets(int index, int numSteps){
+		
+		
+		
+	}
+	
+	public void calcTargets(int thisCell, int numSteps){
 		
 	}
 	public Set<Integer> getTargets(){
