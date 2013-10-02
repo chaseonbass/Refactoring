@@ -99,7 +99,7 @@ public class IntBoardTests {
 	public void testTargets0_3()
 	{
 		board.startTargets(0, 3);
-		Set<Integer> targets= board.getTargets();
+		Set targets= board.getTargets();
 		Assert.assertEquals(6, targets.size());
 		Assert.assertTrue(targets.contains(12));
 		Assert.assertTrue(targets.contains(9));
@@ -112,7 +112,7 @@ public class IntBoardTests {
 	public void testTargets1_1()
 	{
 		board.startTargets(1, 1);
-		Set<Integer> targets= board.getTargets();
+		Set targets= board.getTargets();
 		Assert.assertEquals(3, targets.size());
 		Assert.assertTrue(targets.contains(0));
 		Assert.assertTrue(targets.contains(5));
@@ -122,7 +122,7 @@ public class IntBoardTests {
 	public void testTargets6_2()
 	{
 		board.startTargets(6, 2);
-		Set<Integer> targets= board.getTargets();
+		Set targets= board.getTargets();
 		Assert.assertEquals(7, targets.size());
 		Assert.assertTrue(targets.contains(3));
 		Assert.assertTrue(targets.contains(1));
@@ -136,7 +136,7 @@ public class IntBoardTests {
 	public void testTargets15_4()
 	{
 		board.startTargets(15, 4);
-		Set<Integer> targets= board.getTargets();
+		Set targets= board.getTargets();
 		Assert.assertEquals(6, targets.size());
 		Assert.assertTrue(targets.contains(2));
 		Assert.assertTrue(targets.contains(13));
@@ -150,7 +150,7 @@ public class IntBoardTests {
 	public void testTargets9_5()
 	{
 		board.startTargets(9, 5);
-		Set<Integer> targets= board.getTargets();
+		Set targets= board.getTargets();
 		Assert.assertEquals(8, targets.size());
 		Assert.assertTrue(targets.contains(10));
 		Assert.assertTrue(targets.contains(8));
@@ -165,7 +165,7 @@ public class IntBoardTests {
 	public void testTargets12_6()
 	{
 		board.startTargets(12, 6);
-		Set<Integer> targets= board.getTargets();
+		Set targets= board.getTargets();
 		Assert.assertEquals(7, targets.size());
 		Assert.assertTrue(targets.contains(14));
 		Assert.assertTrue(targets.contains(9));

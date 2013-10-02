@@ -4,12 +4,15 @@ import java.awt.Point;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.LinkedList;
+import java.util.Map;
 import java.util.Set;
 
 public class IntBoard {
 	private int row, column, index;
 	private LinkedList<LinkedList> adjList = new LinkedList<LinkedList>();
 	//ArrayList<ArrayList<Integer>> adjacencyList = new ArrayList<ArrayList<Integer>>();
+	private Map<Integer, LinkedList<Integer>> adjMtx;
+	private boolean[] visited;
 	private int maxRows;
 	private int maxColumns;
 	
