@@ -14,7 +14,7 @@ public class IntBoard {
 	//ArrayList<ArrayList<Integer>> adjacencyList = new ArrayList<ArrayList<Integer>>();
 	private Map<Integer, LinkedList<Integer>> adjMtx;
 	private Set<Integer> targets;
-	private LinkedList<Integer> tempo = new LinkedList<Integer>();
+	  //temporary adjacency list for a cell
 	
 	private boolean[] visited;
 	private int maxRows;
@@ -55,6 +55,7 @@ public class IntBoard {
 	}
 	public void startTargets(int index, int numSteps){
 		calcAdjacencies();
+		
 		visited = new boolean[adjList.size()];
 		for(int i = 0; i < visited.length; i++){
 			visited[i] = false;
@@ -67,7 +68,10 @@ public class IntBoard {
 		
 	}
 	public void calcTargets(int thisCell, int numSteps){
-		tempo = adjList.get(thisCell);  // tempo is a LinkedList<Integer>
+		LinkedList<Integer> tempo = new LinkedList<Integer>();
+	
+		tempo = adjList.get(thisCell);  // tempo is a LinkedList<Integer>	
+		tempo = (LinkedList<Integer>) tempo.clone();
 		for(int i = 0; i < tempo.size(); i++){
 			if(visited[tempo.get(i)] == true){
 				tempo.remove(i);             // if visited is true, remove this guy from tempo
@@ -86,7 +90,7 @@ public class IntBoard {
 		
 	}
 	
-	public void calcTargetsfucked(int thisCell, int numSteps){
+	/*public void calcTargetsfucked(int thisCell, int numSteps){
 		System.out.println(thisCell);
 		tempo = adjList.get(thisCell);
 		int oldSize = tempo.size();
@@ -109,7 +113,7 @@ public class IntBoard {
 			}
 		
 			
-		/*if(numSteps > 1){
+		if(numSteps > 1){
 			for(int i = 0; i < tempo.size(); i++){
 				if(visited[tempo.get(i)] == false){
 					calcTargets(tempo.get(i), numSteps--);
@@ -121,12 +125,12 @@ public class IntBoard {
 			for(int i = 0; i < oldSize; i++){
 					targets.add(tempo.get(i));
 					System.out.println(tempo.get(i));
-				}*/
+				}
 				
 			
 		//}
 
-/*		adjMtx.get(visited);
+		adjMtx.get(visited);
 		for (){
 			visited[adjCell] = true;
 			if(numSteps ==1)
@@ -138,7 +142,7 @@ public class IntBoard {
 			
 		}*/
 		
-	}
+	//}
 	public Set<Integer> getTargets(){
 		
 		return targets;
