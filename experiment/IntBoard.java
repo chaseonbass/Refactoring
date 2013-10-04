@@ -50,12 +50,10 @@ public class IntBoard {
 				
 				adjList.add(indexAdjacencies);
 			}
-		}
-		
+		}	
 	}
 	public void startTargets(int index, int numSteps){
 		calcAdjacencies();
-		
 		visited = new boolean[adjList.size()];
 		for(int i = 0; i < visited.length; i++){
 			visited[i] = false;
@@ -64,8 +62,6 @@ public class IntBoard {
 		visited[index] = true;
 	
 		calcTargets(index,numSteps);
-		
-		
 	}
 	public void calcTargets(int thisCell, int numSteps){
 		LinkedList<Integer> tempo = new LinkedList<Integer>();
@@ -87,74 +83,15 @@ public class IntBoard {
 			}
 			visited[tempo.get(i)] = false;    //visited[adjCell] = false
 		}
-		
 	}
-	
-	/*public void calcTargetsfucked(int thisCell, int numSteps){
-		System.out.println(thisCell);
-		tempo = adjList.get(thisCell);
-		int oldSize = tempo.size();
-		visited[thisCell] = true;
-
-			for(int i = 0; i < tempo.size(); i++){
-				if(visited[tempo.get(i)]==true){
-					tempo.remove(i);
-				}
-			}
-			for(int i = 0; i < tempo.size(); i++){
-				if(numSteps == 1){
-					targets.add(tempo.get(i));  //adds list of adjacencies for the cell to targets
-					System.out.println(targets);
-				}
-				else{
-					calcTargets(tempo.get(i), numSteps--);
-				}
-				visited[tempo.get(i)] = false;
-			}
-		
-			
-		if(numSteps > 1){
-			for(int i = 0; i < tempo.size(); i++){
-				if(visited[tempo.get(i)] == false){
-					calcTargets(tempo.get(i), numSteps--);
-				}
-			}
-		}
-		else{
-			targets = new HashSet<Integer>();
-			for(int i = 0; i < oldSize; i++){
-					targets.add(tempo.get(i));
-					System.out.println(tempo.get(i));
-				}
-				
-			
-		//}
-
-		adjMtx.get(visited);
-		for (){
-			visited[adjCell] = true;
-			if(numSteps ==1)
-				Targets.add(adjCell);
-			else
-				calcTargets(adjCell, numSteps--);
-			visited[adjCell] = false;
-			
-			
-		}*/
-		
-	//}
 	public Set<Integer> getTargets(){
-		
 		return targets;
 	}
 	public LinkedList<Integer> getAdjList(int cell){
-		
-		
 		return adjList.get(cell);
 	}
 	public int calcIndex(int row, int column){
 		int index = row* 4 + column;
-		
 		return index;	
 	}
 
