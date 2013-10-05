@@ -33,7 +33,7 @@ public class Board {
 	}
 	
 	public int calcIndex(int rowNum, int columnNum){
-			int index = rowNum* numColumns + columnNum;	
+			int index = rowNum*numColumns + columnNum;	
 			return index;
 	}
 
@@ -103,29 +103,14 @@ public class Board {
 		String[] tempColumns = {""};
 		while(in.hasNext()){
 			tempColumns = in.nextLine().split(",");
-			for(int i = 0; i < tempColumns.length; i++){
+/*			for(int i = 0; i < tempColumns.length; i++){
 				System.out.println(tempColumns[i]);
 				cells.add(new RoomCell(i/numColumns, i%numColumns, tempColumns[i]));
-			}
+			}*/
 			tempRows++;
 		}
 		numColumns = tempColumns.length;
-		System.out.println(numColumns);
 		numRows = tempRows;
-		FileReader reada = new FileReader(legendFile);
-		Scanner bin = new Scanner(reada);
-		while(bin.hasNext()){
-			String[] rowChars = bin.nextLine().split(",");
-			for(int i = 0; i < rowChars.length; i++){
-				if(rowChars[i] == "W")
-					cells.add(new WalkwayCell());
-				/*else{
-					RoomCell room = new RoomCell(0,0,rowChars[i]);
-					System.out.println(rowChars[i]);
-					cells.add(room);
-				}*/
-			}
-		}
 	}
 		catch(FileNotFoundException e){
 			System.out.println(e.getLocalizedMessage());

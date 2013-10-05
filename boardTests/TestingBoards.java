@@ -97,8 +97,8 @@ public class TestingBoards {
 			// Test each corner of the board
 			assertEquals(0, board.calcIndex(0, 0));
 			assertEquals(NUM_COLUMNS-1, board.calcIndex(0, NUM_COLUMNS-1));
-			assertEquals(483, board.calcIndex(NUM_ROWS-1, 0));
-			assertEquals(505, board.calcIndex(NUM_ROWS-1, NUM_COLUMNS-1));
+			assertEquals(441, board.calcIndex(NUM_ROWS-1, 0));
+			assertEquals(461, board.calcIndex(NUM_ROWS-1, NUM_COLUMNS-1));
 			// Test a couple others
 			assertEquals(22, board.calcIndex(1, 1));
 			assertEquals(62, board.calcIndex(2, 20));		
