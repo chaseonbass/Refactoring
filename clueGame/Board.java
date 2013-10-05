@@ -23,8 +23,9 @@ public class Board {
 	
 	public void loadConfigFiles(){
 		try{
-		loadBoardConfig();
-		loadRoomConfig();
+				loadRoomConfig();
+				loadBoardConfig();
+
 		}
 		catch(BadConfigFormatException e){
 			System.out.println(e.getMessage());
@@ -53,11 +54,13 @@ public class Board {
 	}
 
 	public RoomCell getRoomCellAt(int row, int column) {
-		RoomCell room = new RoomCell(row,column);
-		if(room.isRoom() == true){
-			return room;
+		calcIndex(row,column);
+
+		if(cells.get(calcIndex(row,column)).isRoom() == true){
+			if(cells.get(calcIndex(row,column)).isRoom() == true){
+				return (RoomCell) cells.get(calcIndex(row,column));
+			}
 		}
-		else
 			return null;
 	}
 
@@ -83,11 +86,8 @@ public class Board {
 				if (keyAndRoom.length >2){
 					throw new BadConfigFormatException();
 				}
-				System.out.println(keyAndRoom[1]);
 				rooms.put(keyAndRoom[0].toCharArray()[0], keyAndRoom[1]);
 			}
-		
-			
 		} catch (FileNotFoundException e) {
 			System.out.println(e.getMessage());
 		}
@@ -98,15 +98,34 @@ public class Board {
 		try{
 		FileReader reader = new FileReader(sheetName);
 		Scanner in = new Scanner(reader);
+		boolean format = false;
 		int tempRows = 0;
 		String[] tempColumns = {""};
 		while(in.hasNext()){
 			tempColumns = in.nextLine().split(",");
+			for(int i = 0; i < tempColumns.length; i++){
+				System.out.println(tempColumns[i]);
+				cells.add(new RoomCell(i/numColumns, i%numColumns, tempColumns[i]));
+			}
 			tempRows++;
 		}
 		numColumns = tempColumns.length;
 		System.out.println(numColumns);
 		numRows = tempRows;
+		FileReader reada = new FileReader(legendFile);
+		Scanner bin = new Scanner(reada);
+		while(bin.hasNext()){
+			String[] rowChars = bin.nextLine().split(",");
+			for(int i = 0; i < rowChars.length; i++){
+				if(rowChars[i] == "W")
+					cells.add(new WalkwayCell());
+				/*else{
+					RoomCell room = new RoomCell(0,0,rowChars[i]);
+					System.out.println(rowChars[i]);
+					cells.add(room);
+				}*/
+			}
+		}
 	}
 		catch(FileNotFoundException e){
 			System.out.println(e.getLocalizedMessage());

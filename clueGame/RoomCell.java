@@ -5,7 +5,7 @@ public class RoomCell extends BoardCell {
 	int row, column;
 	DoorDirection doorDirection;
 	char roomInitial;
-	public RoomCell(int row, int column){
+	public RoomCell(int row, int column, String cell){
 		this.row = row;
 		this.column = column;
 	}
