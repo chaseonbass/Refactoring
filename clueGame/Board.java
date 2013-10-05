@@ -32,7 +32,7 @@ public class Board {
 	}
 	
 	public int calcIndex(int rowNum, int columnNum){
-			int index = rowNum* maxColumns + columnNum;	
+			int index = rowNum* numColumns + columnNum;	
 			return index;
 	}
 
@@ -79,8 +79,12 @@ public class Board {
 			FileReader reader = new FileReader(legendFile);
 			Scanner in = new Scanner(reader);
 			while(in.hasNext()){
-				rooms.put(in.next().charAt(0), in.next());
-				System.out.println(rooms.toString());
+				String[] keyAndRoom = in.nextLine().split(", ");
+				if (keyAndRoom.length >2){
+					throw new BadConfigFormatException();
+				}
+				System.out.println(keyAndRoom[1]);
+				rooms.put(keyAndRoom[0].toCharArray()[0], keyAndRoom[1]);
 			}
 		
 			
@@ -92,7 +96,17 @@ public class Board {
 	public void loadBoardConfig() throws BadConfigFormatException{
 		// TODO Auto-generated method stub
 		try{
-		FileReader reader = new FileReader("BoardLayout.csv");
+		FileReader reader = new FileReader(sheetName);
+		Scanner in = new Scanner(reader);
+		int tempRows = 0;
+		String[] tempColumns = {""};
+		while(in.hasNext()){
+			tempColumns = in.nextLine().split(",");
+			tempRows++;
+		}
+		numColumns = tempColumns.length;
+		System.out.println(numColumns);
+		numRows = tempRows;
 	}
 		catch(FileNotFoundException e){
 			System.out.println(e.getLocalizedMessage());
