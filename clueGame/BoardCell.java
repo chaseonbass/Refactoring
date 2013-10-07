@@ -3,21 +3,41 @@ package clueGame;
 public abstract class BoardCell {
 	
 	private int row, column;
-	public BoardCell(){
-		
+	String cell;
+	char roomInitial;
+	public BoardCell(int row, int column, String cell){
+		this.row = row;
+		this.column = column;
+		this.cell = cell;
+		char[] cellInit = cell.toCharArray();
+		roomInitial = cellInit[0];
 	}
 	
+	
 	public boolean isWalkway(){
-		return false;
+		if(roomInitial == 'W')
+			return true;
+		else
+			return false;
 	}
 	
 	public boolean isRoom(){
-		return false;
+		if(cell.length() > 1)
+			return false;
+		else
+			return true;
 		
 	}
 	
 	public boolean isDoorway(){
-		return false;
+		if(cell.length() == 2){
+			if(cell.charAt(1) == 'R' || cell.charAt(1) == 'U' || cell.charAt(1) == 'D' || cell.charAt(1) == 'L')
+				return true;
+		}
+			return false;
+	}
+	public char getInitial(){
+		return roomInitial;
 	}
 
 }
