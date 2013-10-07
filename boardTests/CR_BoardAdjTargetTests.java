@@ -1,9 +1,4 @@
-package boardTests;
-
-import static org.junit.Assert.*;
-
-import org.junit.Test;
-
+package clueTests;
 
 import java.util.LinkedList;
 import java.util.Set;
@@ -14,7 +9,6 @@ import org.junit.Test;
 
 import clueGame.Board;
 import clueGame.BoardCell;
-import experiment.IntBoard;
 
 public class CR_BoardAdjTargetTests {
 	private static Board board;
