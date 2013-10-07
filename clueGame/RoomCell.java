@@ -3,24 +3,11 @@ package clueGame;
 public class RoomCell extends BoardCell {
 	public enum DoorDirection{UP, DOWN, LEFT, RIGHT, NONE}
 	int row, column;
+	String cell;
 	DoorDirection doorDirection;
 	char roomInitial;
 	public RoomCell(int row, int column, String cell){
-		this.row = row;
-		this.column = column;
-	}
-	
-	public boolean isRoom(){
-		return true;
-	}
-
-	public Object getDoorDirection() {
-		return null;
-	}
-
-	public Object getInitial() {
-		// TODO Auto-generated method stub
-		return null;
+		super(row, column, cell);
 	}
 	
 /*	public void draw(){

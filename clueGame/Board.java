@@ -10,7 +10,7 @@ import java.util.Scanner;
 
 public class Board {
 	
-	private ArrayList<BoardCell> cells;
+	private ArrayList<BoardCell> cells = new ArrayList<BoardCell>() ;
 	private Map<Character,String> rooms;
 	private int maxColumns, maxRows;
 	private int numRows;
@@ -53,15 +53,14 @@ public class Board {
 		return numColumns;
 	}
 
-	public RoomCell getRoomCellAt(int row, int column) {
-		calcIndex(row,column);
-
-		if(cells.get(calcIndex(row,column)).isRoom() == true){
+	public BoardCell getRoomCellAt(int row, int column) {
+		return (RoomCell) cells.get(calcIndex(row,column));
+/*		if(cells.get(calcIndex(row,column)).isRoom() == true){
 			if(cells.get(calcIndex(row,column)).isRoom() == true){
 				return (RoomCell) cells.get(calcIndex(row,column));
 			}
 		}
-			return null;
+			return null;*/
 	}
 
 	public int getMaxColumns() {
@@ -103,14 +102,22 @@ public class Board {
 		String[] tempColumns = {""};
 		while(in.hasNext()){
 			tempColumns = in.nextLine().split(",");
-/*			for(int i = 0; i < tempColumns.length; i++){
-				System.out.println(tempColumns[i]);
-				cells.add(new RoomCell(i/numColumns, i%numColumns, tempColumns[i]));
-			}*/
+			for(int i = 0; i < tempColumns.length; i++){
+				RoomCell room = new RoomCell(tempRows, i, tempColumns[i]);
+					if(rooms.containsKey(tempColumns[i].charAt(0)) == false)
+						throw new BadConfigFormatException();
+				cells.add(room);
+				if(tempRows == 0){
+					numColumns = tempColumns.length;
+				}
+				else if(tempColumns.length != numColumns){
+					throw new BadConfigFormatException();
+				}
+			}
 			tempRows++;
 		}
-		numColumns = tempColumns.length;
 		numRows = tempRows;
+		
 	}
 		catch(FileNotFoundException e){
 			System.out.println(e.getLocalizedMessage());
