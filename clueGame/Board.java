@@ -17,6 +17,7 @@ public class Board {
 	private int maxRows, maxColumns;
 	private int numRows, numColumns;
 	private String sheetName, legendFile;
+	
 	public Board(String sheetName, String legendFile){
 		this.sheetName = sheetName;
 		this.legendFile = legendFile;
@@ -31,8 +32,7 @@ public class Board {
 		}
 	}
 	public int calcIndex(int rowNum, int columnNum){
-		int index = rowNum*numColumns + columnNum;	
-		return index;
+		return rowNum*numColumns + columnNum;
 	}
 	public ArrayList<BoardCell> getCells() {
 		return cells;
@@ -48,12 +48,6 @@ public class Board {
 	}
 	public BoardCell getRoomCellAt(int row, int column) {
 		return (RoomCell) cells.get(calcIndex(row,column));
-		/*		if(cells.get(calcIndex(row,column)).isRoom() == true){
-			if(cells.get(calcIndex(row,column)).isRoom() == true){
-				return (RoomCell) cells.get(calcIndex(row,column));
-			}
-		}
-			return null;*/
 	}
 	public int getMaxColumns() {
 		return maxColumns;
@@ -64,6 +58,7 @@ public class Board {
 	public BoardCell getCellAt(int i) {
 		return cells.get(i);
 	}
+	
 	public void loadRoomConfig() throws BadConfigFormatException{
 		rooms = new HashMap<Character, String>();
 		try {
@@ -93,8 +88,8 @@ public class Board {
 				tempColumns = in.nextLine().split(",");
 				for(int i = 0; i < tempColumns.length; i++){
 					RoomCell room = new RoomCell(tempRows, i, tempColumns[i]);
-					if(rooms.containsKey(tempColumns[i].charAt(0)) == false){
-						throw new BadConfigFormatException(tempColumns[i]+"is an invalid room letter assignment");
+					if(!rooms.containsKey(tempColumns[i].charAt(0))){
+						throw new BadConfigFormatException(tempColumns[i]+" is an invalid room letter assignment");
 					}
 					cells.add(room);
 					if(tempRows == 0){
@@ -113,10 +108,10 @@ public class Board {
 		}
 	}
 
-	// copied from int board class below this lineee
+	// copied from int board class below this line 
+	// --------------------------------------------------------------------------------
 
 	private LinkedList<LinkedList> adjList = new LinkedList<LinkedList>();
-	//ArrayList<ArrayList<Integer>> adjacencyList = new ArrayList<ArrayList<Integer>>();
 	private Map<Integer, LinkedList<Integer>> adjMtx;
 	private Set<BoardCell> targets;
 
@@ -131,7 +126,7 @@ public class Board {
 		for(row = 0; row < numRows; row++){
 			for(column = 0; column < numColumns; column++){
 				LinkedList <Integer> indexAdjacencies = new LinkedList <Integer>();
-				if(cells.get(index).isDoorway() == true){
+				if(cells.get(index).isDoorway()){
 					// if current cell is doorway, check for correct direction and add approp. cell
 					RoomCell room = (RoomCell)cells.get(index);
 					if(room.getDoorDirection() == room.doorDirection.UP){
@@ -147,35 +142,35 @@ public class Board {
 						indexAdjacencies.add(index+1);
 					}
 				}
-				else if(cells.get(index).isRoom() == true){
+				else if(cells.get(index).isRoom()){
 					// If the current cell is a room, don't add any adjacencies
 				}
 				else{
-					if(row != 0 && cells.get(index-numColumns).isRoom() == false){
+					if(row != 0 && !cells.get(index-numColumns).isRoom()){
 						// if cell above is not doorway or is but has correct direction, add to list
 						RoomCell room = (RoomCell)cells.get(index-numColumns);
-						if(room.getDoorDirection() == room.doorDirection.DOWN || room.isDoorway() == false)
+						if(room.getDoorDirection() == room.doorDirection.DOWN || !room.isDoorway())
 							indexAdjacencies.add(index-numColumns);
 					}
 
-					if(column != 0 && cells.get(index-1).isRoom() == false){
+					if(column != 0 && !cells.get(index-1).isRoom()){
 						// if cell to left is not doorway or is but has correct direction, add to list
 						RoomCell room = (RoomCell)cells.get(index-1);
-						if(room.getDoorDirection() == room.doorDirection.RIGHT || room.isDoorway() == false)
+						if(room.getDoorDirection() == room.doorDirection.RIGHT || !room.isDoorway())
 							indexAdjacencies.add(index-1);
 					}
 
-					if(row != numRows -1 && cells.get(index+numColumns).isRoom() == false){
+					if(row != numRows -1 && !cells.get(index+numColumns).isRoom()){
 						// if cell below is not doorway or is but has correct direction, add to list
 						RoomCell room = (RoomCell)cells.get(index+numColumns);
-						if(room.getDoorDirection() == room.doorDirection.UP || room.isDoorway() == false) 
+						if(room.getDoorDirection() == room.doorDirection.UP || !room.isDoorway()) 
 							indexAdjacencies.add(index+numColumns);
 					}
 
-					if(column != numColumns -1 && cells.get(index+1).isRoom() == false){
+					if(column != numColumns -1 && !cells.get(index+1).isRoom()){
 						// if cell to right is not doorway or is but has correct direction, add to list
 						RoomCell room = (RoomCell)cells.get(index+1);
-						if(room.getDoorDirection() == room.doorDirection.LEFT || room.isDoorway() == false)
+						if(room.getDoorDirection() == room.doorDirection.LEFT || !room.isDoorway())
 							indexAdjacencies.add(index+1);
 					}
 				}
