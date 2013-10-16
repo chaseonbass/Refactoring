@@ -2,13 +2,20 @@ package boardTests;
 
 import static org.junit.Assert.*;
 
+import org.junit.Test;
+
+// Doing a static import allows me to write assertEquals rather than
+//Assert.assertEquals
+import static junit.framework.Assert.assertEquals;
+import static org.junit.Assert.*;
+
 import java.io.FileNotFoundException;
 import java.util.Map;
 
-import junit.framework.Assert;
-
+import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
+
 import clueGame.BadConfigFormatException;
 import clueGame.Board;
 import clueGame.BoardCell;
@@ -22,7 +29,7 @@ public class TestingBoards {
 	
 	@BeforeClass
 	public static void setUp(){
-		board= new Board("BoardLayout.csv", "legend.txt");
+		board = new Board("BoardLayout.csv", "legend.txt");
 		board.loadConfigFiles();
 	}
 
@@ -47,7 +54,7 @@ public class TestingBoards {
 	public void testBoardDimensions() {
 		// Ensure we have the proper number of rows and columns
 		assertEquals(NUM_ROWS, board.getNumRows());
-		assertEquals(NUM_COLUMNS, board.getNumColumns());		
+		assertEquals(NUM_COLUMNS, board.getNumColumns());	
 	}
 	
 	// Test a doorway in each direction, plus two cells that are not
@@ -56,20 +63,20 @@ public class TestingBoards {
 		@Test
 		public void FourDoorDirections() {
 			// Test one each RIGHT/LEFT/UP/DOWN
-			RoomCell room = board.getRoomCellAt(2, 6);
+			RoomCell room = (RoomCell) board.getRoomCellAt(2, 6);
 			assertTrue(room.isDoorway());
 			assertEquals(RoomCell.DoorDirection.DOWN, room.getDoorDirection());
-			room = board.getRoomCellAt(0, 11);
+			room = (RoomCell) board.getRoomCellAt(0, 11);
 			assertTrue(room.isDoorway());
 			assertEquals(RoomCell.DoorDirection.RIGHT, room.getDoorDirection());
-			room = board.getRoomCellAt(20, 17);
+			room = (RoomCell) board.getRoomCellAt(20, 17);
 			assertTrue(room.isDoorway());
 			assertEquals(RoomCell.DoorDirection.LEFT, room.getDoorDirection());
-			room = board.getRoomCellAt(7, 5);
+			room = (RoomCell) board.getRoomCellAt(7, 5);
 			assertTrue(room.isDoorway());
 			assertEquals(RoomCell.DoorDirection.UP, room.getDoorDirection());
 			// Test that room pieces that aren't doors know it
-			room = board.getRoomCellAt(1, 1);
+			room = (RoomCell) board.getRoomCellAt(1, 1);
 			assertFalse(room.isDoorway());	
 			// Test that walkways are not doors
 			BoardCell cell = board.getCellAt(board.calcIndex(7, 7));
@@ -83,14 +90,14 @@ public class TestingBoards {
 		{
 			int numDoors = 0;
 			int totalCells = board.getNumColumns() * board.getNumRows();
-			Assert.assertEquals(420, totalCells);
+			Assert.assertEquals(462, totalCells);
 			for (int i=0; i<totalCells; i++)
 			{
 				BoardCell cell = board.getCellAt(i);
 				if (cell.isDoorway())
 					numDoors++;
 			}
-			Assert.assertEquals(18, numDoors);
+			Assert.assertEquals(19, numDoors);
 		}
 		@Test
 		public void testCalcIndex() {

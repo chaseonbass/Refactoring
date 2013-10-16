@@ -22,10 +22,10 @@ public abstract class BoardCell {
 	}
 	
 	public boolean isRoom(){
-		if(cell.length() > 1)
-			return false;
-		else
+		if(cell.length() == 1 && (roomInitial != 'W'))
 			return true;
+		else
+			return false;
 		
 	}
 	

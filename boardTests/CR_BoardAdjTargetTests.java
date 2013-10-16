@@ -1,4 +1,4 @@
-package clueTests;
+package boardTests;
 
 import java.util.LinkedList;
 import java.util.Set;
@@ -14,7 +14,7 @@ public class CR_BoardAdjTargetTests {
 	private static Board board;
 	@BeforeClass
 	public static void setUp() {
-		board = new Board();
+		board = new Board("ClueLayout.csv", "ClueLegend.txt");		
 		board.loadConfigFiles();
 		board.calcAdjacencies();
 
@@ -211,7 +211,6 @@ public class CR_BoardAdjTargetTests {
 		Assert.assertTrue(targets.contains(board.getCellAt(board.calcIndex(19, 7))));
 		Assert.assertTrue(targets.contains(board.getCellAt(board.calcIndex(18, 6))));
 		Assert.assertTrue(targets.contains(board.getCellAt(board.calcIndex(20, 6))));
-		
 		// Includes a path that doesn't have enough length
 		board.calcTargets(14, 0, 4);
 		targets= board.getTargets();
