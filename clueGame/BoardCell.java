@@ -17,16 +17,14 @@ public abstract class BoardCell {
 	public boolean isWalkway(){
 		if(roomInitial == 'W')
 			return true;
-		else
-			return false;
+		return false;
 	}
 	
 	public boolean isRoom(){
+		// LOOK AT THIS LINE // -- LINE 24 --------------------------------
 		if(cell.length() == 1 && (roomInitial != 'W'))
 			return true;
-		else
-			return false;
-		
+		return false;
 	}
 	
 	public boolean isDoorway(){
@@ -34,7 +32,7 @@ public abstract class BoardCell {
 			if(cell.charAt(1) == 'R' || cell.charAt(1) == 'U' || cell.charAt(1) == 'D' || cell.charAt(1) == 'L')
 				return true;
 		}
-			return false;
+		return false;
 	}
 	public char getInitial(){
 		return roomInitial;

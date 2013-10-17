@@ -67,6 +67,7 @@ public class Board {
 			while(in.hasNext()){
 				String[] keyAndRoom = in.nextLine().split(", ");
 				if (keyAndRoom.length >2){
+					// LOOK AT THIS LINE // -- LINE 70 --------------------------------
 					throw new BadConfigFormatException("Bad legend Config");
 				}
 				rooms.put(keyAndRoom[0].toCharArray()[0], keyAndRoom[1]);
@@ -80,7 +81,6 @@ public class Board {
 		try{
 			FileReader reader = new FileReader(sheetName);
 			Scanner in = new Scanner(reader);
-			boolean format = false;
 			int tempRows = 0;
 			numRows = 0;
 			String[] tempColumns = {""};
@@ -89,6 +89,7 @@ public class Board {
 				for(int i = 0; i < tempColumns.length; i++){
 					RoomCell room = new RoomCell(tempRows, i, tempColumns[i]);
 					if(!rooms.containsKey(tempColumns[i].charAt(0))){
+						// LOOK AT THIS LINE // -- LINE 92 --------------------------------
 						throw new BadConfigFormatException(tempColumns[i]+" is an invalid room letter assignment");
 					}
 					cells.add(room);
@@ -96,6 +97,7 @@ public class Board {
 						numColumns = tempColumns.length;
 					}
 					else if(tempColumns.length != numColumns){
+						// LOOK AT THIS LINE // -- LINE 100 --------------------------------
 						throw new BadConfigFormatException("Bad Columns");
 					}
 				}
@@ -118,6 +120,7 @@ public class Board {
 	private boolean[] visited;
 	private int index, row, column, visitedIndex;
 	private ArrayList<BoardCell> helper = new ArrayList<BoardCell>();
+	
 	public void calcAdjacencies(){
 		adjMtx = new HashMap<Integer, LinkedList<Integer>>();
 		index = 0;
