@@ -160,14 +160,14 @@ public class Board {
 							indexAdjacencies.add(index-1);
 					}
 
-					if(row != numRows -1 && !cells.get(index+numColumns).isRoom()){
+					if(row != numRows - 1 && !cells.get(index+numColumns).isRoom()){
 						// if cell below is not doorway or is but has correct direction, add to list
 						RoomCell room = (RoomCell)cells.get(index+numColumns);
 						if(room.getDoorDirection() == room.doorDirection.UP || !room.isDoorway()) 
 							indexAdjacencies.add(index+numColumns);
 					}
 
-					if(column != numColumns -1 && !cells.get(index+1).isRoom()){
+					if(column != numColumns - 1 && !cells.get(index+1).isRoom()){
 						// if cell to right is not doorway or is but has correct direction, add to list
 						RoomCell room = (RoomCell)cells.get(index+1);
 						if(room.getDoorDirection() == room.doorDirection.LEFT || !room.isDoorway())
