@@ -187,18 +187,18 @@ public class Board {
 		tempo = adjMtx.get(thisCell);  // tempo is a LinkedList<Integer>	
 		tempo = (LinkedList<Integer>) tempo.clone();
 		for(int i = 0; i < tempo.size(); i++){
-			if(visited[tempo.get(i)] == true){
+			if(visited[tempo.get(i)]){
 				tempo.remove(i);             // if visited is true, remove this guy from tempo
 			}
 		}
 		for(int i = 0; i < tempo.size(); i++){
 			visited[tempo.get(i)] = true;    // set adjCell = true
-			if(numSteps == 1 || cells.get(tempo.get(i)).isDoorway() == true ){
-				if(cells.get(tempo.get(i)).isDoorway() == true){
+			if(numSteps == 1 || cells.get(tempo.get(i)).isDoorway()){
+				if(cells.get(tempo.get(i)).isDoorway()){
 					targets.add(cells.get(tempo.get(i)));
 				}
 
-				if(targets.contains(cells.get(tempo.get(i))) != true){
+				if(!targets.contains(cells.get(tempo.get(i)))){
 					targets.add(cells.get(tempo.get(i)));		//add each adjCell to targets
 				}
 			}
@@ -209,7 +209,7 @@ public class Board {
 		}
 	}
 	public void calcTargets(int row, int column, int numSteps){
-
+		// this is called FIRST, before startTargets
 		visited = new boolean[adjMtx.size()];
 		for(int i = 0; i < visited.length; i++){
 			visited[i] = false;
@@ -219,7 +219,7 @@ public class Board {
 		visited[index] = true;
 
 		startTargets(row, column, numSteps);
-		while(targets.contains(cells.get(calcIndex(row,column))))
+		if(targets.contains(cells.get(index)))
 			targets.remove(cells.get(index));
 
 	}
@@ -227,8 +227,6 @@ public class Board {
 		return targets;
 	}
 	public LinkedList<Integer> getAdjList(int cell){
-		LinkedList<Integer> bleh = new LinkedList<Integer>();
-		bleh = adjMtx.get(cell);
-		return bleh;
+		return adjMtx.get(cell);
 	}
 }
