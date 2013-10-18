@@ -23,6 +23,14 @@ public class ClueGame {
 		
 	}
 	
+	public ArrayList<Card> getDeck(){
+		return deck;
+	}
+	
+	public ArrayList<Player> getPlayers(){
+		return players;
+	}
+	
 	public boolean checkAccusation(Solution s){
 		return false;
 	}

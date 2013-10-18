@@ -14,7 +14,7 @@ public class ComputerPlayer extends Player{
 	}
 	
 	public void pickLocation(Set<BoardCell> t){
-		
+		// this uses seen
 	}
 	
 	public void createSuggestion(){
