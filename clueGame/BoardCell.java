@@ -21,8 +21,7 @@ public abstract class BoardCell {
 	}
 	
 	public boolean isRoom(){
-		// LOOK AT THIS LINE // -- LINE 24 --------------------------------
-		if(cell.length() == 1 && (roomInitial != 'W'))
+		if((cell.length() == 1 && (roomInitial != 'W')) || cell.length() == 2)
 			return true;
 		return false;
 	}
