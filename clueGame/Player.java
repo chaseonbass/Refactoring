@@ -6,12 +6,15 @@ public class Player {
 
 	private String name;
 	private String color;
-	private int StartingLocation;
+	private int startingLocation;
 
 	private ArrayList<Card> myCards;
 	
-	public Player(String n){
+	public Player(String n, String c, int s){
 		name = n;
+		color = c;
+		startingLocation = s;
+		
 	}
 	
 	public Card disproveSuggestion(String p, String r, String w){
@@ -28,6 +31,6 @@ public class Player {
 	}
 
 	public int getStartingLocation() {
-		return StartingLocation;
+		return startingLocation;
 	}
 }

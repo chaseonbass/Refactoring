@@ -13,13 +13,13 @@ public class GameSetupTests {
 	
 	@BeforeClass
 	public static void setUp() {
-		game = new ClueGame();
+		game = new ClueGame("PlayerData");
 		game.loadConfigFiles();
 		game.deal();
 	}	
 	
 	@Test
-	public void LoadingPeople(){
+	public void LoadingPlayers(){
 		assert(game.getPlayers().get(0).getName().equals("Miss Scarlet"));
 		assert(game.getPlayers().get(1).getName().equals("Colonel Mustard"));
 		assert(game.getPlayers().get(4).getName().equals("Professor Plum"));
@@ -29,7 +29,6 @@ public class GameSetupTests {
 		assert(game.getPlayers().get(0).getStartingLocation() == 301);
 		assert(game.getPlayers().get(1).getStartingLocation() == 7);
 		assert(game.getPlayers().get(4).getStartingLocation() == 141);
-		fail("not yet implemented");
 	}
 	
 	@Test

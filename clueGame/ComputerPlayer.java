@@ -8,8 +8,8 @@ public class ComputerPlayer extends Player{
 	private char lastRoomVisited;
 	private ArrayList<Card> seen;
 	
-	public ComputerPlayer(String n) {
-		super(n);
+	public ComputerPlayer(String n, String c, int s) {
+		super(n, c, s);
 		// TODO Auto-generated constructor stub
 	}
 	

@@ -12,7 +12,7 @@ public class GameActionTests {
 	
 	@BeforeClass
 	public static void setUp() {
-		board = new ClueGame();
+		board = new ClueGame("PlayerData.txt");
 		board.loadConfigFiles();
 		board.deal();
 	}	
