@@ -16,7 +16,9 @@ public class ClueGame {
 	}
 	
 	public void deal(){
-		
+		int people = 6;
+		int weapons = 6;
+		int rooms = 9;
 	}
 	
 	public void loadConfigFiles(){

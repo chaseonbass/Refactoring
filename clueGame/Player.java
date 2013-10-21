@@ -33,4 +33,8 @@ public class Player {
 	public int getStartingLocation() {
 		return startingLocation;
 	}
+	
+	public ArrayList<Card> getCards(){
+		return myCards;
+	}
 }
