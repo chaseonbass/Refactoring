@@ -129,48 +129,43 @@ public class Board {
 		for(row = 0; row < numRows; row++){
 			for(column = 0; column < numColumns; column++){
 				LinkedList <Integer> indexAdjacencies = new LinkedList <Integer>();
-				if(cells.get(index).isDoorway()){
-					// if current cell is doorway, check for correct direction and add approp. cell
-					RoomCell room = (RoomCell)cells.get(index);
-					if(room.getDoorDirection() == room.doorDirection.UP){
-						indexAdjacencies.add(index-numColumns);
+				if(cells.get(index).isRoom()){
+					if(cells.get(index).isDoorway()){
+						// if current cell is doorway, check for correct direction and add approp. cell
+						RoomCell room = (RoomCell)cells.get(index);
+						if(room.getDoorDirection() == room.doorDirection.UP){
+							indexAdjacencies.add(index-numColumns);
+						}else if(room.getDoorDirection() == room.doorDirection.DOWN){
+							indexAdjacencies.add(index+numColumns);
+						}else if(room.getDoorDirection() == room.doorDirection.LEFT){
+							indexAdjacencies.add(index-1);
+						}else if(room.getDoorDirection() == room.doorDirection.RIGHT){
+							indexAdjacencies.add(index+1);
+						}
 					}
-					else if(room.getDoorDirection() == room.doorDirection.DOWN){
-						indexAdjacencies.add(index+numColumns);
-					}
-					else if(room.getDoorDirection() == room.doorDirection.LEFT){
-						indexAdjacencies.add(index-1);
-					}
-					else if(room.getDoorDirection() == room.doorDirection.RIGHT){
-						indexAdjacencies.add(index+1);
-					}
-				}
-				else if(cells.get(index).isRoom()){
-					// If the current cell is a room, don't add any adjacencies
-				}
-				else{
-					if(row != 0 && !cells.get(index-numColumns).isRoom()){
+				}else{
+					if(row != 0 && (!cells.get(index-numColumns).isRoom() || cells.get(index-numColumns).isDoorway())){
 						// if cell above is not doorway or is but has correct direction, add to list
 						RoomCell room = (RoomCell)cells.get(index-numColumns);
 						if(room.getDoorDirection() == room.doorDirection.DOWN || !room.isDoorway())
 							indexAdjacencies.add(index-numColumns);
 					}
 
-					if(column != 0 && !cells.get(index-1).isRoom()){
+					if(column != 0 && (!cells.get(index-1).isRoom() || cells.get(index-1).isDoorway())){
 						// if cell to left is not doorway or is but has correct direction, add to list
 						RoomCell room = (RoomCell)cells.get(index-1);
 						if(room.getDoorDirection() == room.doorDirection.RIGHT || !room.isDoorway())
 							indexAdjacencies.add(index-1);
 					}
 
-					if(row != numRows - 1 && !cells.get(index+numColumns).isRoom()){
+					if(row != numRows - 1 && (!cells.get(index+numColumns).isRoom()  || cells.get(index+numColumns).isDoorway())){
 						// if cell below is not doorway or is but has correct direction, add to list
 						RoomCell room = (RoomCell)cells.get(index+numColumns);
 						if(room.getDoorDirection() == room.doorDirection.UP || !room.isDoorway()) 
 							indexAdjacencies.add(index+numColumns);
 					}
 
-					if(column != numColumns - 1 && !cells.get(index+1).isRoom()){
+					if(column != numColumns - 1 && (!cells.get(index+1).isRoom()  || cells.get(index+1).isDoorway())){
 						// if cell to right is not doorway or is but has correct direction, add to list
 						RoomCell room = (RoomCell)cells.get(index+1);
 						if(room.getDoorDirection() == room.doorDirection.LEFT || !room.isDoorway())
@@ -182,6 +177,7 @@ public class Board {
 			}
 		}	
 	}
+	
 	public void startTargets(int row, int column, int numSteps){
 		int thisCell = calcIndex(row, column);
 
