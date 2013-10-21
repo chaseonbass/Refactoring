@@ -5,3 +5,10 @@
 /BadConfigFormatException.class
 /text.class
 /RoomCell$DoorDirection.class
+/Card$CardType.class
+/Card.class
+/ClueGame.class
+/ComputerPlayer.class
+/HumanPlayer.class
+/Player.class
+/Solution.class

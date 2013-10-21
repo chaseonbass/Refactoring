@@ -3,3 +3,5 @@
 /TestingBoards.class
 /PathCalcTest.class
 /BoardAdjTests.class
+/GameActionTests.class
+/GameSetupTests.class

@@ -13,7 +13,7 @@ public class GameSetupTests {
 	
 	@BeforeClass
 	public static void setUp() {
-		game = new ClueGame("PlayerData");
+		game = new ClueGame("PlayerData.txt");
 		game.loadConfigFiles();
 		game.deal();
 	}	
@@ -23,12 +23,12 @@ public class GameSetupTests {
 		assert(game.getPlayers().get(0).getName().equals("Miss Scarlet"));
 		assert(game.getPlayers().get(1).getName().equals("Colonel Mustard"));
 		assert(game.getPlayers().get(4).getName().equals("Professor Plum"));
-		assert(game.getPlayers().get(0).getColor().equals("Red"));
-		assert(game.getPlayers().get(1).getColor().equals("Yellow"));
-		assert(game.getPlayers().get(4).getColor().equals("Purple"));
-		assert(game.getPlayers().get(0).getStartingLocation() == 301);
-		assert(game.getPlayers().get(1).getStartingLocation() == 7);
-		assert(game.getPlayers().get(4).getStartingLocation() == 141);
+		assert(game.getPlayers().get(0).getColor().equals("red"));
+		assert(game.getPlayers().get(1).getColor().equals("yellow"));
+		assert(game.getPlayers().get(4).getColor().equals("purple"));
+		assert(game.getPlayers().get(0).getStartingLocation() == 7);
+		assert(game.getPlayers().get(1).getStartingLocation() == 296);
+		assert(game.getPlayers().get(4).getStartingLocation() == 18);
 	}
 	
 	@Test
