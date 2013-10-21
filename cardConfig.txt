@@ -1,0 +1,21 @@
+WEAPON, Master Blaster of DOOM
+WEAPON, Dual Butterknives
+WEAPON, Warrior's SwordStaff
+WEAPON, Classy Hat and Umbrella Combo
+WEAPON, Fruitcake
+WEAPON, Rubber Ducky
+SUSPECT, Miss Scarlet
+SUSPECT, Colonel Mustard
+SUSPECT, Mrs. White
+SUSPECT, Reverend Green
+SUSPECT, Professor Plum
+SUSPECT, Mrs. Peacock
+ROOM, Conservatory
+ROOM, Kitchen
+ROOM, Ballroom
+ROOM, Billiard room
+ROOM, Library
+ROOM, Study
+ROOM, Dining room
+ROOM, Lounge
+ROOM, Hall

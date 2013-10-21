@@ -8,11 +8,13 @@ import java.util.Scanner;
 public class ClueGame {
 
 	private String playerData;
+	private String cardData;
 	private ArrayList<Card> deck;
 	private ArrayList<Player> players;
 	
-	public ClueGame(String playerData){
+	public ClueGame(String playerData, String cardData){
 		this.playerData = playerData;
+		this.cardData = cardData;
 	}
 	
 	public void deal(){

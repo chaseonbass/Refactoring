@@ -1,7 +1,7 @@
 package clueGame;
 
 public class Card {
-	public enum CardType {PERSON, ROOM, WEAPON}
+	public enum CardType {SUSPECT, ROOM, WEAPON}
 	private String name;
 	private CardType type;
 	
@@ -9,7 +9,7 @@ public class Card {
 		name = n;
 	}
 	
-	public String getCard(){
+	public String getName(){
 		return name;
 	}
 	
