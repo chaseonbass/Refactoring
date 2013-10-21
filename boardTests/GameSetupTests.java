@@ -17,22 +17,22 @@ public class GameSetupTests {
 	
 	@BeforeClass
 	public static void setUp() {
-		game = new ClueGame("PlayerData");
+		game = new ClueGame("PlayerData.txt", "cardConfig.txt", "BoardLayout.csv", "ClueLegend.txt");
 		game.loadConfigFiles();
-		game.deal();
+		//game.deal();
 	}	
 	
 	@Test
 	public void LoadingPlayers(){
-		assert(game.getPlayers().get(0).getName().equals("Miss Scarlet"));
-		assert(game.getPlayers().get(1).getName().equals("Colonel Mustard"));
-		assert(game.getPlayers().get(4).getName().equals("Professor Plum"));
-		assert(game.getPlayers().get(0).getColor().equals("Red"));
-		assert(game.getPlayers().get(1).getColor().equals("Yellow"));
-		assert(game.getPlayers().get(4).getColor().equals("Purple"));
-		assert(game.getPlayers().get(0).getStartingLocation() == 301);
-		assert(game.getPlayers().get(1).getStartingLocation() == 7);
-		assert(game.getPlayers().get(4).getStartingLocation() == 141);
+		assert(game.getPlayers().get(0).getName().equals("Andrew Lancaster"));
+		assert(game.getPlayers().get(1).getName().equals("Attia Rei"));
+		assert(game.getPlayers().get(4).getName().equals("Xina Atal"));
+		assert(game.getPlayers().get(0).getColor().equals("brown"));
+		assert(game.getPlayers().get(1).getColor().equals("white"));
+		assert(game.getPlayers().get(4).getColor().equals("black"));
+		assert(game.getPlayers().get(0).getStartingLocation() == game.getBoard().calcIndex(5, 3));
+		assert(game.getPlayers().get(1).getStartingLocation() == game.getBoard().calcIndex(5, 17));
+		assert(game.getPlayers().get(4).getStartingLocation() == game.getBoard().calcIndex(20, 14));
 	}
 	
 	@Test
@@ -56,17 +56,18 @@ public class GameSetupTests {
 		boolean weapon = false;
 		boolean person = false;
 		for (Card c : game.getDeck()){
-			switch (c.getType()){
-			case ROOM: room = true;
-			case WEAPON: weapon = true;
-			case PERSON: person = true;
-			default: fail("Invalid card type");
+			Card.CardType ct = (Card.CardType)(c.getType());
+			if (ct.equals(Card.CardType.ROOM))
+					room = true;
+			else if (ct.equals(Card.CardType.WEAPON))
+					weapon = true;
+			else if (ct.equals(Card.CardType.PERSON))
+					person = true;
+			else fail("Invalid card type");
 		}
 		assert(room);
 		assert(weapon);
 		assert(person);
-		}
-		
 	}
 	
 	@Test

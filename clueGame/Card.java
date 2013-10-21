@@ -5,8 +5,9 @@ public class Card {
 	private String name;
 	private CardType type;
 	
-	public Card(String n){
+	public Card(String n, CardType t){
 		name = n;
+		type = t;
 	}
 	
 	public String getCard(){
@@ -15,5 +16,11 @@ public class Card {
 	
 	public CardType getType(){
 		return type;
+	}
+	
+	public boolean equals(Card other){
+		if (other == null)
+			return false;
+		return other.getType().equals(type);
 	}
 }
