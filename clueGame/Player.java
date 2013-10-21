@@ -14,7 +14,7 @@ public class Player {
 		name = n;
 		color = c;
 		startingLocation = s;
-		
+		myCards = new ArrayList<Card>();
 	}
 	
 	public Card disproveSuggestion(String p, String r, String w){
@@ -32,5 +32,9 @@ public class Player {
 
 	public int getStartingLocation() {
 		return startingLocation;
+	}
+	
+	public ArrayList<Card> getCards(){
+		return myCards;
 	}
 }

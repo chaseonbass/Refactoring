@@ -1,6 +1,8 @@
-Miss Scarlet, red, 7
-Colonel Mustard, yellow, 296
-Mrs. White, white, 160
-Reverend Green, green, 447
-Professor Plum, purple, 18
-Mrs. Peacock, blue, 313
+Andrew Lancaster, brown, 5, 3
+Attia Rei, white, 5, 17
+Tanyia Allenmeius, pink, 6, 19
+Iris Atniva, green, 20, 16
+Xina Atal, black, 20, 14
+Klair Enzeia, yellow, 19, 6
+Elni Lias, blue, 14, 14
+Vivienne Hexil, purple, 11, 1
