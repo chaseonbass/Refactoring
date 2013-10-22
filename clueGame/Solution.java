@@ -11,8 +11,8 @@ public class Solution {
 		weapon = w;
 	}
 	
-	// might need a equals() override
 	public boolean equals(Solution other){
+		// Just gotta see they are all the same!
 		return (suspect.equals(other.suspect) && room.equals(other.room) && weapon.equals(other.weapon));
 	}
 	
