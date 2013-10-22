@@ -137,5 +137,10 @@ public class ClueGame {
 		return false;
 	}
 	
+	public Solution getSolution() {
+		// ONLY FOR TESTING
+		return solution;
+	}
+	
 	
 }
