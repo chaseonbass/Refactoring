@@ -78,12 +78,18 @@ public class ClueGame {
 			String tempName;
 			String tempColor;
 			int tempStart;
+			boolean humanSet = false;
 			while(in.hasNext()){
 				String[] tempLine = in.nextLine().split(", ");
 				tempName = tempLine[0];
 				tempColor = tempLine[1];
 				tempStart = Integer.parseInt(tempLine[2]);
-				players.add(new Player(tempName,tempColor,tempStart));
+				if (!humanSet) {
+					players.add(new HumanPlayer(tempName,tempColor,tempStart));
+					humanSet = true;
+				} else {
+					players.add(new ComputerPlayer(tempName,tempColor,tempStart));
+				}
 			}
 		} catch (FileNotFoundException e) {
 			System.out.println(e.getMessage());
@@ -140,6 +146,10 @@ public class ClueGame {
 	public Solution getSolution() {
 		// ONLY FOR TESTING
 		return solution;
+	}
+	
+	public Board getBoard() {
+		return board;
 	}
 	
 	

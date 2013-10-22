@@ -22,7 +22,7 @@ public class GameSetupTests {
 	}	
 	
 	@Test
-	public void LoadingPlayers(){
+	public void LoadingPlayersTest(){
 		game.loadConfigFiles();
 		assertEquals(game.getPlayers().size(),6);
 		assertEquals(game.getPlayers().get(0).getName(),"Miss Scarlet");
@@ -37,11 +37,14 @@ public class GameSetupTests {
 	}
 	
 	@Test
-	public void LoadingCards(){
+	public void LoadingCardsTest(){
 		game.loadConfigFiles();
 		ArrayList<Card> tempCards = game.getDeck();
+		
+		// Test we have all the cards
 		assertEquals(tempCards.size(),21);
 		
+		// Test we we have enouhg of each type
 		int w = 0;
 		int s = 0;
 		int r = 0;
@@ -57,34 +60,33 @@ public class GameSetupTests {
 		assertEquals(s,6);
 		assertEquals(r,9);
 		
+		// Test the name feature is working
 		assertEquals(tempCards.get(2).getName(),"Warrior's SwordStaff");
 		assertEquals(tempCards.get(10).getName(),"Professor Plum");
 		assertEquals(tempCards.get(17).getName(),"Study");
 	}
 	
 	@Test
-	public void DealingCards(){
+	public void DealingCardsTest(){
 		game.loadConfigFiles();
 		game.deal();
+		
+		// Test all cards were dealt
 		assertEquals(game.getDeck().size(),0);
 		
+		// Test all players have about same number of cards
 		for (Player p : game.getPlayers())
 			for (Player q : game.getPlayers())
 				if (Math.abs(p.getCards().size()-q.getCards().size()) > 1)
 					fail("Difference greater than 1");
 		
-		for(Player p : game.getPlayers()){
-			for(Card c: p.getCards()){
-				for(Player q : game.getPlayers()){
-					if(p != q){
-						for(Card d : q.getCards()){
-							if(d.equals(c)){
+		// Test all players have unique cards
+		for(Player p : game.getPlayers())
+			for(Card c: p.getCards())
+				for(Player q : game.getPlayers())
+					if(p != q)
+						for(Card d : q.getCards())
+							if(d.equals(c))
 								fail("Two players have same card.");
-							}
-						}
-					}
-				}
-			}
-		}
 	}
 }

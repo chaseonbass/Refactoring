@@ -8,13 +8,22 @@ public class ComputerPlayer extends Player{
 	private char lastRoomVisited;
 	private ArrayList<Card> seen;
 	
-	public ComputerPlayer(String n, String c, int s) {
-		super(n, c, s);
-		// TODO Auto-generated constructor stub
+	public ComputerPlayer() {
+		// for testing
 	}
 	
-	public void pickLocation(Set<BoardCell> t){
-		// this uses seen
+	public ComputerPlayer(char lrv) {
+		lastRoomVisited = lrv;
+	}
+	
+	public ComputerPlayer(String n, String c, int s) {
+		super(n, c, s);
+	}
+	
+	public BoardCell pickLocation(Set<BoardCell> t){
+		// this uses 'lastRoomVisited'
+		// Temporary return type WalkwayCell. Can be either a RoomCell or WalkwayCell
+		return new WalkwayCell(0,0,"X");
 	}
 	
 	public void createSuggestion(){

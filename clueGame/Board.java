@@ -58,6 +58,10 @@ public class Board {
 	public BoardCell getCellAt(int i) {
 		return cells.get(i);
 	}
+	public BoardCell getCellAt(int r, int c) {
+		// Overloaded option
+		return getCellAt(r*numColumns + c);
+	}
 	
 	public void loadRoomConfig() throws BadConfigFormatException{
 		rooms = new HashMap<Character, String>();

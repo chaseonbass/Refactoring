@@ -10,6 +10,10 @@ public class Player {
 
 	private ArrayList<Card> myCards;
 	
+	public Player() {
+		// for testing
+	}
+	
 	public Player(String n, String c, int s){
 		name = n;
 		color = c;
@@ -18,7 +22,6 @@ public class Player {
 	}
 	
 	public Card disproveSuggestion(String p, String r, String w){
-		
 		return myCards.get(0);
 	}
 	
@@ -40,6 +43,5 @@ public class Player {
 
 	public void addCard(Card c) {
 		myCards.add(c);
-		
 	}
 }
