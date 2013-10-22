@@ -1,12 +1,12 @@
 package clueGame;
 
 public class Solution {
-	private String person;
+	private String suspect;
 	private String room;
 	private String weapon;
 	
-	public Solution(String p, String r, String w){
-		person = p;
+	public Solution(String s, String r, String w){
+		suspect = s;
 		room = r;
 		weapon = w;
 	}
@@ -15,11 +15,11 @@ public class Solution {
 	
 	// Getters are just for testing
 	
-	public String getCriminal(){
-		return person;
+	public String getSuspect(){
+		return suspect;
 	}
 	
-	public String getCrimeScene(){
+	public String getRoom(){
 		return room;
 	}
 	

@@ -18,12 +18,12 @@ public class GameSetupTests {
 	@BeforeClass
 	public static void setUp() {
 		game = new ClueGame("PlayerData.txt", "cardConfig.txt", "BoardLayout.csv", "legend.txt");
-		game.loadConfigFiles();
-		game.deal();
+		//game.deal();
 	}	
 	
 	@Test
 	public void LoadingPlayers(){
+		game.loadConfigFiles();
 		assertEquals(game.getPlayers().size(),6);
 		assertEquals(game.getPlayers().get(0).getName(),"Miss Scarlet");
 		assertEquals(game.getPlayers().get(1).getName(),"Colonel Mustard");
@@ -38,6 +38,7 @@ public class GameSetupTests {
 	
 	@Test
 	public void LoadingCards(){
+		game.loadConfigFiles();
 		ArrayList<Card> tempCards = game.getDeck();
 		assertEquals(tempCards.size(),21);
 		
@@ -63,6 +64,8 @@ public class GameSetupTests {
 	
 	@Test
 	public void DealingCards(){
+		game.loadConfigFiles();
+		game.deal();
 		assertEquals(game.getDeck().size(),0);
 		
 		for (Player p : game.getPlayers())

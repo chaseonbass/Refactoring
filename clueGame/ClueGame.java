@@ -3,6 +3,7 @@ package clueGame;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Scanner;
 
 public class ClueGame {
@@ -25,6 +26,43 @@ public class ClueGame {
 	
 	public void deal(){
 		
+		Collections.shuffle(deck);
+		
+		//these are indicators that solution doesn't have these types of cards, YET
+		boolean suspect = false;
+		boolean weapon = false;
+		boolean room = false;
+		String s = "";
+		String w = "";
+		String r = "";
+		
+		while (!deck.isEmpty() && (!suspect || !weapon || !room)){
+			Card c = deck.remove(0);
+			if (!suspect && c.getType() == Card.CardType.SUSPECT){
+				s = c.getName();
+				suspect = true;
+			}
+			else if (!weapon && c.getType() == Card.CardType.WEAPON){
+				w = c.getName();
+				weapon = true;
+			}
+			else if (!room && c.getType() == Card.CardType.ROOM){
+				r = c.getName();
+				room = true;
+			}
+			else{
+				deck.add(c);
+			}
+		}
+		
+		solution = new Solution(s,r,w);
+		Collections.shuffle(deck);
+		
+		int i = 0;
+		while (!deck.isEmpty()) {
+			players.get(i % players.size()).addCard(deck.remove(0));
+			i++;
+		}
 	}
 	
 	public void loadConfigFiles(){
