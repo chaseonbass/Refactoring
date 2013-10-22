@@ -12,6 +12,7 @@ public class Player {
 	
 	public Player() {
 		// for testing
+		myCards = new ArrayList<Card>();
 	}
 	
 	public Player(String n, String c, int s){
@@ -21,7 +22,7 @@ public class Player {
 		myCards = new ArrayList<Card>();
 	}
 	
-	public Card disproveSuggestion(String p, String r, String w){
+	public Card disproveSuggestion(Card suspect, Card weapon, Card room){
 		return myCards.get(0);
 	}
 	

@@ -2,6 +2,9 @@ package boardTests;
 
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
+
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -10,6 +13,8 @@ import clueGame.BoardCell;
 import clueGame.Card;
 import clueGame.ClueGame;
 import clueGame.ComputerPlayer;
+import clueGame.HumanPlayer;
+import clueGame.Player;
 import clueGame.Solution;
 
 public class GameActionTests {
@@ -24,6 +29,29 @@ public class GameActionTests {
 		
 		board = game.getBoard();
 		board.calcAdjacencies();
+		
+		// for disproval tests----------------------------------------------
+		// Our cards to play with for testing the next two tests
+		mustardCard = new Card(Card.CardType.SUSPECT, "Colonel Mustard");
+		missScarletCard = new Card(Card.CardType.SUSPECT, "Miss Scarlet");
+		knivesCard = new Card(Card.CardType.WEAPON, "Dual Butterknives");
+		fruitcakeCard = new Card(Card.CardType.WEAPON, "Fruitcake");
+		hallCard = new Card(Card.CardType.ROOM, "Hall");
+		loungeCard = new Card(Card.CardType.ROOM, "Lounge");
+		
+		// non-hand cards
+		plumCard = new Card(Card.CardType.SUSPECT, "Professor Plum");
+		masterCard = new Card(Card.CardType.WEAPON, "Master Blaster of DOOM");
+		conservCard = new Card(Card.CardType.ROOM, "Conservatory");
+		
+		// Build test player and test hand
+		testPlayer = new Player();
+		testPlayer.addCard(mustardCard);
+		testPlayer.addCard(missScarletCard);
+		testPlayer.addCard(knivesCard);
+		testPlayer.addCard(fruitcakeCard);
+		testPlayer.addCard(hallCard);
+		testPlayer.addCard(loungeCard);
 	}
 
 	@Test
@@ -182,11 +210,120 @@ public class GameActionTests {
 	}
 	
 	// ----------------------------------------------------------------------------------
+	// TESTING FOR DISPROVING SUGGESTIONS
+	private static Card mustardCard;
+	private static Card missScarletCard;
+	private static Card knivesCard;
+	private static Card fruitcakeCard;
+	private static Card hallCard;
+	private static Card loungeCard;
+	private static Player testPlayer;
+	// non-hand cards
+	private static Card plumCard;
+	private static Card masterCard;
+	private static Card conservCard;
 	
 	@Test
-	public void testDisprovingSuggestion(){
-		fail("not yet implemented");
+	public void testOnePlayerOneMatch(){
+		// Test each possible outcome
+		Card disproveSuspect = testPlayer.disproveSuggestion(missScarletCard, masterCard, conservCard);
+		Card disproveWeapon = testPlayer.disproveSuggestion(plumCard, fruitcakeCard, conservCard);
+		Card disproveRoom = testPlayer.disproveSuggestion(plumCard, masterCard, hallCard);
+		Card nullSuggestion = testPlayer.disproveSuggestion(plumCard, masterCard, conservCard);
+		assertEquals(disproveSuspect,missScarletCard);
+		assertEquals(disproveWeapon,fruitcakeCard);
+		assertEquals(disproveRoom,hallCard);
+		assertNull(nullSuggestion);
 	}
+	
+	@Test
+	public void testOnePlayerMultMatches(){
+		// Test that a random card is shown for multiple matches
+		int suspect = 0;
+		int room = 0;
+		int weapon = 0;
+		for (int i = 0; i<100; i++){
+			Card disproval = testPlayer.disproveSuggestion(missScarletCard, knivesCard, loungeCard);
+			if(disproval.equals(missScarletCard))
+				suspect++;
+			else if(disproval.equals(knivesCard))
+				weapon++;
+			else if(disproval.equals(loungeCard))
+				room++;
+			else
+				fail("valid card not selected");
+		}
+		assertEquals(100, suspect + room + weapon);
+		assertTrue(suspect>10);
+		assertTrue(room>10);
+		assertTrue(weapon>10);
+	}
+	
+	@Test
+	public void testAllQueriedToDisprove(){
+		// Make test players
+		HumanPlayer player = new HumanPlayer("Miss Scarlet", "Red", 0);
+		ComputerPlayer com1 = new ComputerPlayer();
+		ComputerPlayer com2 = new ComputerPlayer();
+		ComputerPlayer com3 = new ComputerPlayer();
+		
+		// Give them test hands
+		player.addCard(conservCard);
+		player.addCard(fruitcakeCard);
+		player.addCard(plumCard);
+		
+		com1.addCard(hallCard);
+		com1.addCard(masterCard);
+		
+		com2.addCard(missScarletCard);
+		com2.addCard(knivesCard);
+		
+		com3.addCard(mustardCard);
+		com3.addCard(loungeCard);
+		
+		// Put them in a test array
+		ArrayList<Player> players = new ArrayList<Player>();
+		players.add(player);
+		players.add(com1);
+		players.add(com2);
+		players.add(com3);
+		
+		// Modify the game so that we can use its methods to test with
+		game.setPlayers(players);
+		
+		// Test five (5) cases
+		
+		// Test a non-disprovable suggestion, should return 'null'
+		Card nonDisprovable1 = game.handleSuggestion(new Card(Card.CardType.SUSPECT, "dud"), 
+				new Card(Card.CardType.WEAPON, "dud"), new Card(Card.CardType.ROOM, "dud"), player);
+		assertNull(nonDisprovable1);
+		Card nonDisprovable2 = game.handleSuggestion(new Card(Card.CardType.SUSPECT, "dud"), 
+				new Card(Card.CardType.WEAPON, "dud"), new Card(Card.CardType.ROOM, "dud"), com1);
+		assertNull(nonDisprovable2);
+		
+		// Test a suggestion only human can disprove, should return the card they have
+		Card humanDisprovable = game.handleSuggestion(new Card(Card.CardType.SUSPECT, "dud"), 
+				fruitcakeCard, new Card(Card.CardType.ROOM, "dud"), com1);
+		assertEquals(humanDisprovable, fruitcakeCard);
+		
+		// Test a suggestion only the suggester can disprove, should return 'null'
+		Card nonDisprovableTrick = game.handleSuggestion(conservCard, fruitcakeCard, plumCard, player);
+		assertNull(nonDisprovableTrick);
+		
+		// Test that two could disprove, should return first person's card
+		Card twoCanDisprove = game.handleSuggestion(hallCard, knivesCard, plumCard, player);
+		assertEquals(twoCanDisprove, hallCard);
+		Card twoCanDisprove2 = game.handleSuggestion(hallCard, knivesCard, plumCard, com3);
+		assertEquals(twoCanDisprove2, plumCard);
+		
+		// Test that we get to the end of the list (last person can disprove something)
+		Card endCanDisprove = game.handleSuggestion(loungeCard, fruitcakeCard, plumCard, player);
+		assertEquals(endCanDisprove, loungeCard);
+		Card endCanDisprove2 = game.handleSuggestion(loungeCard, knivesCard, missScarletCard, com2);
+		assertEquals(endCanDisprove2, loungeCard);
+	}
+	
+	// ----------------------------------------------------------------------------------
 	
 	@Test
 	public void testMakingSuggestion(){

@@ -6,5 +6,9 @@ public class HumanPlayer extends Player{
 		super(n, c, s);
 		// TODO Auto-generated constructor stub
 	}
+	
+	public void makeSuggestion(Solution s){
+		
+	}
 
 }

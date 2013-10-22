@@ -12,14 +12,18 @@ public class ComputerPlayer extends Player{
 	
 	public ComputerPlayer() {
 		// for testing
+		super();
+		seen = new ArrayList<Card>();
 	}
 	
 	public ComputerPlayer(char lrv) {
 		lastRoomVisited = lrv;
+		seen = new ArrayList<Card>();
 	}
 	
 	public ComputerPlayer(String n, String c, int s) {
 		super(n, c, s);
+		seen = new ArrayList<Card>();
 	}
 	
 	public BoardCell pickLocation(Set<BoardCell> t){
@@ -51,11 +55,11 @@ public class ComputerPlayer extends Player{
 		return new WalkwayCell(0,0,"X");
 	}
 	
-	public void createSuggestion(){
+	public void makeSuggestion(){
 		
 	}
 	
-	public void udateSeen(Card seen){
+	public void updateSeen(Card seen){
 		
 	}
 

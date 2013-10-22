@@ -127,8 +127,11 @@ public class ClueGame {
 		
 	}
 	
-	public void handleSuggestion(String p, String w, String r, Player accuser){
-		
+	public Card handleSuggestion(Card suspect, Card weapon, Card room, Player suggester){
+		// probably calls disproveSuggestion() on the array 'players'
+		// will loop through 'players' and each will try to disprove the suggestion (except the suggester)
+		// will return the first instance of a valid disproval or null if none occurred
+		return null;
 	}
 	
 	public ArrayList<Card> getDeck(){
@@ -150,6 +153,10 @@ public class ClueGame {
 	
 	public Board getBoard() {
 		return board;
+	}
+	
+	public void setPlayers(ArrayList<Player> players) {
+		this.players = players;
 	}
 	
 	
