@@ -12,6 +12,9 @@ public class Solution {
 	}
 	
 	// might need a equals() override
+	public boolean equals(Solution other){
+		return (suspect.equals(other.suspect) && room.equals(other.room) && weapon.equals(other.weapon));
+	}
 	
 	// Getters are just for testing
 	

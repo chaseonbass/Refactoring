@@ -134,7 +134,7 @@ public class ClueGame {
 	}
 	
 	public boolean checkAccusation(Solution s){
-		return false;
+		return s.equals(solution);
 	}
 	
 	public Solution getSolution() {
