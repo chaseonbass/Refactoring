@@ -16,7 +16,7 @@ public class GameSetupTests {
 	
 	@BeforeClass
 	public static void setUp() {
-		game = new ClueGame("PlayerData.txt", "cardConfig.txt");
+		game = new ClueGame("PlayerData.txt", "cardConfig.txt", "BoardLayout.csv", "legend.txt");
 		game.loadConfigFiles();
 		game.deal();
 	}	
