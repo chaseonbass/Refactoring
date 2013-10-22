@@ -11,11 +11,9 @@ public class Solution {
 		weapon = w;
 	}
 	
-	public void setSolution(String p, String r, String w){
-		person = p;
-		room = r;
-		weapon = w;
-	}
+	// might need a equals() override
+	
+	// Getters are just for testing
 	
 	public String getCriminal(){
 		return person;

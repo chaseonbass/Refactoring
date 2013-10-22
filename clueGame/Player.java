@@ -29,6 +29,10 @@ public class Player {
 	public String getColor() {
 		return color;
 	}
+	
+	public ArrayList<Card> getCards(){
+		return myCards;
+	}
 
 	public int getStartingLocation() {
 		return startingLocation;

@@ -10,6 +10,7 @@ import org.junit.Test;
 import clueGame.Board;
 import clueGame.Card;
 import clueGame.ClueGame;
+import clueGame.Player;
 
 public class GameSetupTests {
 	private static ClueGame game;
@@ -39,17 +40,48 @@ public class GameSetupTests {
 	public void LoadingCards(){
 		ArrayList<Card> tempCards = game.getDeck();
 		assertEquals(tempCards.size(),21);
+		
+		int w = 0;
+		int s = 0;
+		int r = 0;
+		for (Card card : tempCards) {
+			if (card.getType().equals(Card.CardType.WEAPON))
+				w++;
+			else if (card.getType().equals(Card.CardType.SUSPECT))
+				s++;
+			else if (card.getType().equals(Card.CardType.ROOM))
+				r++;
+		}
+		assertEquals(w,6);
+		assertEquals(s,6);
+		assertEquals(r,9);
+		
 		assertEquals(tempCards.get(2).getName(),"Warrior's SwordStaff");
-		assertEquals(tempCards.get(2).getType(),Card.CardType.WEAPON);
 		assertEquals(tempCards.get(10).getName(),"Professor Plum");
-		assertEquals(tempCards.get(10).getType(),Card.CardType.SUSPECT);
 		assertEquals(tempCards.get(17).getName(),"Study");
-		assertEquals(tempCards.get(17).getType(),Card.CardType.ROOM);
 	}
 	
 	@Test
 	public void DealingCards(){
-		fail("not yet implemented");
+		assertEquals(game.getDeck().size(),0);
+		
+		for (Player p : game.getPlayers())
+			for (Player q : game.getPlayers())
+				if (Math.abs(p.getCards().size()-q.getCards().size()) > 1)
+					fail("Difference greater than 1");
+		
+		for(Player p : game.getPlayers()){
+			for(Card c: p.getCards()){
+				for(Player q : game.getPlayers()){
+					if(p != q){
+						for(Card d : q.getCards()){
+							if(d.equals(c)){
+								fail("Two players have same card.");
+							}
+						}
+					}
+				}
+			}
+		}
 	}
-
 }

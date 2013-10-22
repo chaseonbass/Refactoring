@@ -8,13 +8,13 @@ import org.junit.Test;
 import clueGame.ClueGame;
 
 public class GameActionTests {
-	private static ClueGame board;
+	private static ClueGame game;
 	
 	@BeforeClass
 	public static void setUp() {
-		board = new ClueGame("PlayerData.txt", "cardConfig");
-		board.loadConfigFiles();
-		board.deal();
+		game = new ClueGame("PlayerData.txt", "cardConfig.txt", "BoardLayout.csv", "legend.txt");
+		game.loadConfigFiles();
+		game.deal();
 	}	
 
 	@Test

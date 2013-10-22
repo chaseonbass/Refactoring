@@ -9,6 +9,7 @@ public class ClueGame {
 
 	private String playerData;
 	private String cardData;
+	private Solution solution;
 	private ArrayList<Card> deck;
 	private ArrayList<Player> players;
 	private Board board;
@@ -97,4 +98,6 @@ public class ClueGame {
 	public boolean checkAccusation(Solution s){
 		return false;
 	}
+	
+	
 }
