@@ -131,6 +131,22 @@ public class ClueGame {
 		// probably calls disproveSuggestion() on the array 'players'
 		// will loop through 'players' and each will try to disprove the suggestion (except the suggester)
 		// will return the first instance of a valid disproval or null if none occurred
+//		for (Player p : getPlayers())
+//			if (!p.equals(suggester))
+//				for (Card c : p.getCards())
+//					if (c.equals(suspect) || c.equals(weapon) || c.equals(room)){
+//						//System.out.println(c + " has been disproved!");
+//						return c;
+//					}
+//		System.out.println("No such card exists! Great suggestion! Okay pau game. Pau is Hawaiian for stop.");
+//		return null;
+//		
+		for (Player p : getPlayers())
+			if (!p.equals(suggester)){
+				Card c = p.disproveSuggestion(suspect, weapon, room);
+				if (c!=null)
+					return c;
+			}
 		return null;
 	}
 	

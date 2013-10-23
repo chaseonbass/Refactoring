@@ -230,7 +230,8 @@ public class GameActionTests {
 		Card disproveWeapon = testPlayer.disproveSuggestion(plumCard, fruitcakeCard, conservCard);
 		Card disproveRoom = testPlayer.disproveSuggestion(plumCard, masterCard, hallCard);
 		Card nullSuggestion = testPlayer.disproveSuggestion(plumCard, masterCard, conservCard);
-		assertEquals(disproveSuspect,missScarletCard);
+		System.out.println(testPlayer);
+		assertEquals(disproveSuspect, missScarletCard);
 		assertEquals(disproveWeapon,fruitcakeCard);
 		assertEquals(disproveRoom,hallCard);
 		assertNull(nullSuggestion);
@@ -327,7 +328,8 @@ public class GameActionTests {
 	
 	@Test
 	public void testMakingSuggestion(){
-		fail("not yet implemented");
+		//computer player enters a room, it makes a suggestion
+		ComputerPlayer cp = new ComputerPlayer();
 	}
 
 }

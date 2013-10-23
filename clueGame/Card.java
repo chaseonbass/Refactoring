@@ -17,4 +17,8 @@ public class Card {
 	public CardType getType(){
 		return type;
 	}
+	
+	public String toString(){
+		return "Card: " + getName() + " Type: " + getType();
+	}
 }
