@@ -28,11 +28,11 @@ public class Player {
 		for (Card c : getCards())
 			if (c.equals(suspect) || c.equals(weapon) || c.equals(room))
 				matches.add(c);
-		Random m = new Random();
+		
 		if (matches.size() >= 1)
 			return matches.get((new Random()).nextInt(matches.size()));
-		else
-			return null;
+		
+		return null;
 	}
 	
 	public String getName() {

@@ -330,6 +330,7 @@ public class GameActionTests {
 	public void testMakingSuggestion(){
 		//computer player enters a room, it makes a suggestion
 		ComputerPlayer cp = new ComputerPlayer();
+		fail("Not yet implemented");
 	}
 
 }

@@ -28,7 +28,6 @@ public class ComputerPlayer extends Player{
 	
 	public BoardCell pickLocation(Set<BoardCell> t){
 		// this uses 'lastRoomVisited'
-		// Temporary return type WalkwayCell. Can be either a RoomCell or WalkwayCell
 		ArrayList<BoardCell> tempUnvisitedDoor = new ArrayList<BoardCell>();
 		for(BoardCell b : t) {
 			if(b.isDoorway() && b.getInitial() != lastRoomVisited)
@@ -56,7 +55,7 @@ public class ComputerPlayer extends Player{
 	}
 	
 	public void makeSuggestion(){
-		
+		// This will make a random suggestion from the possible cards
 	}
 	
 	public void updateSeen(Card seen){
