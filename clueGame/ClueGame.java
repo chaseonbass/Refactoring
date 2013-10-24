@@ -15,8 +15,7 @@ public class ClueGame {
 	private ArrayList<Player> players;
 	
 	private Board board;
-	private ArrayList<Card> weapons;
-	private ArrayList<Card> suspects;
+	private ArrayList<Card> checkDeck;
 	
 	public ClueGame(String playerData, String cardData, 
 			String sheetName, String legendFile){
@@ -27,8 +26,12 @@ public class ClueGame {
 		board.loadConfigFiles();
 	}
 	
+	public char passRoomInformation(int index){
+		return (board.getCellAt(index)).getInitial();
+	}
+	
 	public void deal(){
-		
+		checkDeck = deck;
 		Collections.shuffle(deck);
 		
 		//these are indicators that solution doesn't have these types of cards, YET
@@ -144,6 +147,20 @@ public class ClueGame {
 		return null;
 	}
 	
+	// Overloaded function for working with strings instead
+	// Note: disproveSuggestion also has an overloaded version called disproveSuggestions
+	public Card handleSuggestions(String suspect, String weapon, String room, Player cp2) {
+		
+		for (Player p : getPlayers()){
+			if (!p.equals(cp2)){
+				Card c = p.disproveSuggestions(room, weapon, suspect);
+				if (c!=null)
+					return c;
+			}
+		}
+		return null;
+	}
+	
 	public ArrayList<Card> getDeck(){
 		return deck;
 	}
@@ -167,6 +184,12 @@ public class ClueGame {
 	
 	public void setPlayers(ArrayList<Player> players) {
 		this.players = players;
+	}
+	public void setSolution(Solution s){
+		solution = s;
+	}
+	public void setCheckDeck(ArrayList<Card> c){
+		checkDeck = c;
 	}
 	
 	
