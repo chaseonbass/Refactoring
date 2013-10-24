@@ -1,6 +1,7 @@
 package clueGame;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
@@ -56,55 +57,75 @@ public class ComputerPlayer extends Player{
 		// As a last resort, if it's failing, this is the 'failure' condition
 		return new WalkwayCell(0,0,"X");
 	}
+
 	
-	public void makeSuggestion(String roomName){
-		
-		ArrayList<Card> a = knownDeck;
-		for (Card c : a)
-			System.out.println(c);
-		Card indexCard = a.get(0);
-		//cannot be own hand
-		//has to be from known deck
-		//cannot be what has already been seen
-		boolean isSorting = true;
-		while (!a.isEmpty() || isSorting){
-			Card c = a.remove(0);
-			boolean isInHand = false;
+	public Suggestion makeSuggestion(String roomName){
+		Suggestion sol;
+		//Cannot be in hand
+		//Cannot be from seen
+		ArrayList<Card> al = new ArrayList<Card>();
+		al = knownDeck;
+		//boolean addCard = false;
+//		for (Card c : knownDeck)
+//			for (Card d : getCards())
+//				if (c.getName().equals(d.getName()))
+//					al.add(c);
+//
+//		System.out.println(al);
+//
+//		for (Card c : knownDeck)
+//			for (Card d : getSeen())
+//				if (c.getName().equals(d.getName()))
+//					al.add(c);
+
+		//System.out.println(al);
+		int i = 0;
+		while (!al.isEmpty()){
+			Card c = al.remove(0);
+			boolean removeCard = true;
 			for (Card d : getCards())
 				if (c.getName().equals(d.getName()))
-					isInHand = true;
-				else{
-					for (Card e : seen)
-						if (c.getName().equals(e.getName()))
-							isInHand = true;
-				}
-			if (!isInHand){
-				indexCard = c;
-				a.add(c);
-			}
-			
-			if (c.getName().equals(indexCard.getName()))
+						removeCard = false;
+			for (Card d : getSeen())
+				if (c.getName().equals(d.getName()))
+						removeCard = false;
+			if (!removeCard)
+				i = 0;
+			else
+				al.add(c);
+			i+=1;
+			if (i > 20)
 				break;
-			//return it to the deck and move along		
 		}
-		suspect = new ArrayList<Card>();
-		weapon = new ArrayList<Card>();
-		room = new ArrayList<Card>();
-		
-		while (!a.isEmpty()){
-			Card c = a.remove(0);
-			if (c.getType() == Card.CardType.SUSPECT)
-				suspect.add(c);
-			else if (c.getType() == Card.CardType.WEAPON)
-				weapon.add(c);
-			else if (c.getType() == Card.CardType.ROOM)
-				room.add(c);
+		//System.out.println(al);
+		boolean suspect = false;
+		boolean weapon = false;
+		boolean room = false;
+		String s = "";
+		String w = "";
+		String r = "";
+		Collections.shuffle(al);
+		while (!al.isEmpty() && (!suspect || !weapon || !room)){
+			Card c = al.remove(0);
+			if (!suspect && c.getType() == Card.CardType.SUSPECT){
+				s = c.getName();
+				suspect = true;
+			}
+			else if (!weapon && c.getType() == Card.CardType.WEAPON){
+				w = c.getName();
+				weapon = true;
+			}
+			else if (!room && c.getType() == Card.CardType.ROOM){
+				r = c.getName();
+				room = true;
+			}
 			else{
-				System.out.println("uh oh");
+				al.add(c);
 			}
 		}
-		for (Card c : a)
-			System.out.println(c);
+		
+		return new Suggestion(roomName, w, s);
+
 	}
 	
 	public void updateSeen(Card other){

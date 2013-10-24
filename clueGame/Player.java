@@ -23,10 +23,10 @@ public class Player {
 		myCards = new ArrayList<Card>();
 	}
 	
-	public Card disproveSuggestion(Card missScarletCard, Card masterCard, Card conservCard){
+	public Card disproveSuggestion(Card room, Card weapon, Card suspect){
 		ArrayList<Card> matches = new ArrayList<Card>();
 		for (Card c : getCards())
-			if (c.equals(missScarletCard) || c.equals(masterCard) || c.equals(conservCard))
+			if (c.equals(room) || c.equals(weapon) || c.equals(suspect))
 				matches.add(c);
 		if (matches.size() >= 1)
 			return matches.get((new Random()).nextInt(matches.size()));
@@ -59,5 +59,17 @@ public class Player {
 		for (Card c : myCards)
 			s = s + c + " | ";
 		return s;
+	}
+
+	public Card disproveSuggestions(String room, String weapon, String suspect) {
+		ArrayList<Card> matches = new ArrayList<Card>();
+		for (Card c : getCards()){
+			if (c.getName().equals(room) || c.getName().equals(weapon) || c.getName().equals(suspect))
+				matches.add(c);
+		}
+		if (matches.size() >= 1)
+			return matches.get((new Random()).nextInt(matches.size()));
+		else
+			return null;
 	}
 }

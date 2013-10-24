@@ -16,6 +16,7 @@ import clueGame.ComputerPlayer;
 import clueGame.HumanPlayer;
 import clueGame.Player;
 import clueGame.Solution;
+import clueGame.Suggestion;
 
 public class GameActionTests {
 	private static ClueGame game;
@@ -329,16 +330,6 @@ public class GameActionTests {
 	@Test
 	public void testMakingSuggestion(){
 		
-		
-		
-		//I APOLOGIZE
-		//I HAVE NO FREAKING CLUE HOW TO PLAY THIS GAME
-		
-		//THIS SYSTEM IN THIS TEST HAS 9 CARDS, ONE PLAYER WITH 3, A COMPUTER WITH 3, AND A SOLUTION WITH 3
-		
-		
-		
-		
 		//computer player enters a room, it makes a suggestion
 		ComputerPlayer cp = new ComputerPlayer('H');
 		Player p = new Player();
@@ -377,51 +368,54 @@ public class GameActionTests {
 		
 		assertEquals(3, hasCard);
 
-		ComputerPlayer cp2 = new ComputerPlayer('H');
-		Player p2 = new Player();
-		ArrayList<Player> players2 = new ArrayList<Player>();
-		
-		//update cards seen for test
-
-
-		
-		plumCard = new Card(Card.CardType.SUSPECT, "Professor Plum");
-		masterCard = new Card(Card.CardType.WEAPON, "Master Blaster of DOOM");
-		conservCard = new Card(Card.CardType.ROOM, "Conservatory");
-		ArrayList<Card> tempCheckDeck = new ArrayList<Card>();
-		for (Player p3 : game.getPlayers())
-			for (Card c : p3.getCards())
-				tempCheckDeck.add(c);
-		
-		game.setCheckDeck(tempCheckDeck);
-		
-		cp2.addCard(knivesCard);
-		cp2.addCard(missScarletCard);
-		cp2.addCard(hallCard);
-		cp2.setKnownDeck(tempCheckDeck); //Otherwise I'd have to create an instance of ClueGame within the players itself.
-		p2.addCard(mustardCard);
-		p2.addCard(loungeCard);
-		p2.addCard(fruitcakeCard);
-		
-		Solution s = new Solution(plumCard.getName(), masterCard.getName(),  conservCard.getName());
-		game.setSolution(s);
-		
-		players.add(cp2);
-		players.add(p2);
-		game.setPlayers(players2);
-		
-		
-		cp2.makeSuggestion("Hall");
-		//cp2.makeSuggestion("Hall");
-		//cp2.makeSuggestion("Hall");
-		//including the solution
-		cp2.updateSeen(game.handleSuggestion(cp2.getSuspect(), cp2.getWeapon(), cp2.getRoom(), cp2));
-		
-		//Test cards that have been seen
-		for (Card c : cp2.getSeen())
-			System.out.println(c);
+		int mc = 0;
+		int fc = 0;
+		int nullCounter = 0;
+		for (int i = 0; i < 100; i++){
+			ComputerPlayer cp2 = new ComputerPlayer('H');
+			Player p2 = new Player();
+			ArrayList<Player> players2 = new ArrayList<Player>();
+			plumCard = new Card(Card.CardType.SUSPECT, "Professor Plum");
+			masterCard = new Card(Card.CardType.WEAPON, "Master Blaster of DOOM");
+			conservCard = new Card(Card.CardType.ROOM, "Conservatory");
+			ArrayList<Card> tempCheckDeck = new ArrayList<Card>();
+			for (Player p3 : game.getPlayers())
+				for (Card c : p3.getCards())
+					tempCheckDeck.add(c);
+			tempCheckDeck.add(plumCard);
+			tempCheckDeck.add(masterCard);
+			tempCheckDeck.add(conservCard);
+			game.setCheckDeck(tempCheckDeck);
+			cp2.addCard(knivesCard);
+			cp2.addCard(missScarletCard);
+			cp2.addCard(hallCard);
+			cp2.setKnownDeck(tempCheckDeck); //Otherwise I'd have to create an instance of ClueGame within the players itself.
+			p2.addCard(mustardCard);
+			p2.addCard(loungeCard);
+			p2.addCard(fruitcakeCard);
+			Solution s = new Solution(conservCard.getName(), masterCard.getName(), plumCard.getName() );
+			game.setSolution(s);
+			players2.add(cp2);
+			players2.add(p2);
+			game.setPlayers(players2);
+			Suggestion sug = cp2.makeSuggestion(board.getRooms().get('H'));
+			Card c = game.handleSuggestions(sug.getRoom(), sug.getWeapon(), sug.getSuspect(), cp2);
+			if (c != null){
+				if (c.equals(mustardCard))
+					mc+=1;
+				else if (c.equals(fruitcakeCard))
+					fc+=1;
+			}
+			else
+				nullCounter+=1;
 			
-		fail ("Needs to be implemented");
+			
+		}
+
+		assertTrue(mc > 10); //mustardCard
+		assertTrue(fc > 10); //fruityCakeCrd
+		assertTrue(nullCounter > 10); //nullCard
+			
 		
 		
 		//Test suggester's location is suggested and person and weapon that are part of the suggestion

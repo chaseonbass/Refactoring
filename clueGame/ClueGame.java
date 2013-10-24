@@ -52,6 +52,10 @@ public class ClueGame {
 		
 	}
 	
+	public char passRoomInformation(int index){
+		return (board.getCellAt(index)).getInitial();
+	}
+	
 	public void deal(){
 		checkDeck = deck;
 		Collections.shuffle(deck);
@@ -155,13 +159,13 @@ public class ClueGame {
 		
 	}
 	
-	public Card handleSuggestion(Card card, Card card2, Card card3, Player suggester){
+	public Card handleSuggestion(Card room, Card weapon, Card suspect, Player suggester){
 		// probably calls disproveSuggestion() on the array 'players'
 		// will loop through 'players' and each will try to disprove the suggestion (except the suggester)
 		// will return the first instance of a valid disproval or null if none occurred
 		for (Player p : getPlayers())
 			if (!p.equals(suggester)){
-				Card c = p.disproveSuggestion(card3, card2, card);
+				Card c = p.disproveSuggestion(room, weapon, suspect);
 				if (c!=null)
 					return c;
 			}
@@ -201,5 +205,17 @@ public class ClueGame {
 	}
 	public void setCheckDeck(ArrayList<Card> c){
 		checkDeck = c;
+	}
+
+	public Card handleSuggestions(String suspect, String weapon, String room, Player cp2) {
+		
+		for (Player p : getPlayers()){
+			if (!p.equals(cp2)){
+				Card c = p.disproveSuggestions(room, weapon, suspect);
+				if (c!=null)
+					return c;
+			}
+		}
+		return null;
 	}
 }
