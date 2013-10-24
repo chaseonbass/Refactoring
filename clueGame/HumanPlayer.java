@@ -1,5 +1,8 @@
 package clueGame;
 
+import java.util.ArrayList;
+import java.util.Random;
+
 public class HumanPlayer extends Player{
 
 	public HumanPlayer(String n, String c, int s) {
@@ -10,5 +13,4 @@ public class HumanPlayer extends Player{
 	public void makeSuggestion(Solution s){
 		
 	}
-
 }

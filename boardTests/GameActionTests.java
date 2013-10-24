@@ -230,7 +230,7 @@ public class GameActionTests {
 		Card disproveWeapon = testPlayer.disproveSuggestion(plumCard, fruitcakeCard, conservCard);
 		Card disproveRoom = testPlayer.disproveSuggestion(plumCard, masterCard, hallCard);
 		Card nullSuggestion = testPlayer.disproveSuggestion(plumCard, masterCard, conservCard);
-		System.out.println(testPlayer);
+		//System.out.println(testPlayer);
 		assertEquals(disproveSuspect, missScarletCard);
 		assertEquals(disproveWeapon,fruitcakeCard);
 		assertEquals(disproveRoom,hallCard);
@@ -294,8 +294,8 @@ public class GameActionTests {
 		
 		// Test five (5) cases
 		
-		// Test a non-disprovable suggestion, should return 'null'
-		Card nonDisprovable1 = game.handleSuggestion(new Card(Card.CardType.SUSPECT, "dud"), 
+		// Test a non-disproveable suggestion, should return 'null'
+		Card nonDisprovable1 = game.handleSuggestion((new Card(Card.CardType.SUSPECT, "dud")), 
 				new Card(Card.CardType.WEAPON, "dud"), new Card(Card.CardType.ROOM, "dud"), player);
 		assertNull(nonDisprovable1);
 		Card nonDisprovable2 = game.handleSuggestion(new Card(Card.CardType.SUSPECT, "dud"), 
@@ -328,8 +328,103 @@ public class GameActionTests {
 	
 	@Test
 	public void testMakingSuggestion(){
+		
+		
+		
+		//I APOLOGIZE
+		//I HAVE NO FREAKING CLUE HOW TO PLAY THIS GAME
+		
+		//THIS SYSTEM IN THIS TEST HAS 9 CARDS, ONE PLAYER WITH 3, A COMPUTER WITH 3, AND A SOLUTION WITH 3
+		
+		
+		
+		
 		//computer player enters a room, it makes a suggestion
-		ComputerPlayer cp = new ComputerPlayer();
+		ComputerPlayer cp = new ComputerPlayer('H');
+		Player p = new Player();
+		ArrayList<Player> players = new ArrayList<Player>();
+		
+		//update cards seen for test
+		ArrayList<Card> seenCardsTest = new ArrayList<Card>();
+
+		cp.addCard(knivesCard);
+		cp.addCard(missScarletCard);
+		cp.addCard(hallCard);
+		p.addCard(mustardCard);
+		p.addCard(loungeCard);
+		p.addCard(fruitcakeCard);
+		
+		players.add(cp);
+		players.add(p);
+		game.setPlayers(players);
+		
+		//Test make suggestion to learn more info, does not include a card that has been seen (except room)
+		
+		//Test suggestions never seen 
+		seenCardsTest.add(mustardCard);
+		seenCardsTest.add(loungeCard);
+		seenCardsTest.add(hallCard);
+		cp.updateSeen(mustardCard);
+		cp.updateSeen(loungeCard);
+		cp.updateSeen(hallCard);
+		
+		//Test cards that have been seen
+		int hasCard = 0;
+		for (Card c : seenCardsTest)
+			for (Card d : cp.getSeen())
+				if (c.getName().equals(d.getName()))
+					hasCard += 1;
+		
+		assertEquals(3, hasCard);
+
+		ComputerPlayer cp2 = new ComputerPlayer('H');
+		Player p2 = new Player();
+		ArrayList<Player> players2 = new ArrayList<Player>();
+		
+		//update cards seen for test
+
+
+		
+		plumCard = new Card(Card.CardType.SUSPECT, "Professor Plum");
+		masterCard = new Card(Card.CardType.WEAPON, "Master Blaster of DOOM");
+		conservCard = new Card(Card.CardType.ROOM, "Conservatory");
+		ArrayList<Card> tempCheckDeck = new ArrayList<Card>();
+		for (Player p3 : game.getPlayers())
+			for (Card c : p3.getCards())
+				tempCheckDeck.add(c);
+		
+		game.setCheckDeck(tempCheckDeck);
+		
+		cp2.addCard(knivesCard);
+		cp2.addCard(missScarletCard);
+		cp2.addCard(hallCard);
+		cp2.setKnownDeck(tempCheckDeck); //Otherwise I'd have to create an instance of ClueGame within the players itself.
+		p2.addCard(mustardCard);
+		p2.addCard(loungeCard);
+		p2.addCard(fruitcakeCard);
+		
+		Solution s = new Solution(plumCard.getName(), masterCard.getName(),  conservCard.getName());
+		game.setSolution(s);
+		
+		players.add(cp2);
+		players.add(p2);
+		game.setPlayers(players2);
+		
+		
+		cp2.makeSuggestion("Hall");
+		//cp2.makeSuggestion("Hall");
+		//cp2.makeSuggestion("Hall");
+		//including the solution
+		cp2.updateSeen(game.handleSuggestion(cp2.getSuspect(), cp2.getWeapon(), cp2.getRoom(), cp2));
+		
+		//Test cards that have been seen
+		for (Card c : cp2.getSeen())
+			System.out.println(c);
+			
+		fail ("Needs to be implemented");
+		
+		
+		//Test suggester's location is suggested and person and weapon that are part of the suggestion
 	}
 
 }

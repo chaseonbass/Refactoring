@@ -23,12 +23,11 @@ public class Player {
 		myCards = new ArrayList<Card>();
 	}
 	
-	public Card disproveSuggestion(Card suspect, Card weapon, Card room){
+	public Card disproveSuggestion(Card missScarletCard, Card masterCard, Card conservCard){
 		ArrayList<Card> matches = new ArrayList<Card>();
 		for (Card c : getCards())
-			if (c.equals(suspect) || c.equals(weapon) || c.equals(room))
+			if (c.equals(missScarletCard) || c.equals(masterCard) || c.equals(conservCard))
 				matches.add(c);
-		Random m = new Random();
 		if (matches.size() >= 1)
 			return matches.get((new Random()).nextInt(matches.size()));
 		else

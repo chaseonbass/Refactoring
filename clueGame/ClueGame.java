@@ -12,6 +12,7 @@ public class ClueGame {
 	private String cardData;
 	private Solution solution;
 	private ArrayList<Card> deck;
+	private ArrayList<Card> checkDeck;
 	private ArrayList<Player> players;
 	private Board board;
 	
@@ -24,8 +25,35 @@ public class ClueGame {
 		board.loadConfigFiles();
 	}
 	
-	public void deal(){
+	public Card[] getThree(ArrayList<Card> l){
+		boolean suspect = false;
+		boolean weapon = false;
+		boolean room = false;
+		Card[] cards = new Card[3];
+		for (int i = 0; i<l.size() && (!suspect || !weapon || !room); i++){
+			Card c = deck.get(i);
+			if (!suspect && c.getType() == Card.CardType.SUSPECT){
+				suspect = true;
+				cards[0] = c;
+			}
+			else if (!weapon && c.getType() == Card.CardType.WEAPON){
+				weapon = true;
+				cards[1] = c;
+			}
+			else if (!room && c.getType() == Card.CardType.ROOM){
+				room = true;
+				cards[2] = c;
+			}
+			else{
+				deck.add(c);
+			}
+		}
+		return cards;
 		
+	}
+	
+	public void deal(){
+		checkDeck = deck;
 		Collections.shuffle(deck);
 		
 		//these are indicators that solution doesn't have these types of cards, YET
@@ -127,23 +155,13 @@ public class ClueGame {
 		
 	}
 	
-	public Card handleSuggestion(Card suspect, Card weapon, Card room, Player suggester){
+	public Card handleSuggestion(Card card, Card card2, Card card3, Player suggester){
 		// probably calls disproveSuggestion() on the array 'players'
 		// will loop through 'players' and each will try to disprove the suggestion (except the suggester)
 		// will return the first instance of a valid disproval or null if none occurred
-//		for (Player p : getPlayers())
-//			if (!p.equals(suggester))
-//				for (Card c : p.getCards())
-//					if (c.equals(suspect) || c.equals(weapon) || c.equals(room)){
-//						//System.out.println(c + " has been disproved!");
-//						return c;
-//					}
-//		System.out.println("No such card exists! Great suggestion! Okay pau game. Pau is Hawaiian for stop.");
-//		return null;
-//		
 		for (Player p : getPlayers())
 			if (!p.equals(suggester)){
-				Card c = p.disproveSuggestion(suspect, weapon, room);
+				Card c = p.disproveSuggestion(card3, card2, card);
 				if (c!=null)
 					return c;
 			}
@@ -152,6 +170,10 @@ public class ClueGame {
 	
 	public ArrayList<Card> getDeck(){
 		return deck;
+	}
+	
+	public ArrayList<Card> getCheckDeck(){
+		return checkDeck;
 	}
 	
 	public ArrayList<Player> getPlayers(){
@@ -174,6 +196,10 @@ public class ClueGame {
 	public void setPlayers(ArrayList<Player> players) {
 		this.players = players;
 	}
-	
-	
+	public void setSolution(Solution s){
+		solution = s;
+	}
+	public void setCheckDeck(ArrayList<Card> c){
+		checkDeck = c;
+	}
 }
