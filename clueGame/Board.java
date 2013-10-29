@@ -1,6 +1,7 @@
 package clueGame;
 
 
+import java.awt.Graphics;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.ArrayList;
@@ -11,12 +12,32 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.Set;
 
-public class Board {
+import javax.swing.JPanel;
+
+public class Board extends JPanel {
 	private ArrayList<BoardCell> cells = new ArrayList<BoardCell>();
 	private Map<Character,String> rooms;
 	private int maxRows, maxColumns;
 	private int numRows, numColumns;
 	private String sheetName, legendFile;
+	
+	// -------------------------------------------------------------------------
+	// BOARD GUI FUNCTIONALITY
+	public void paintComponent(Graphics g) {
+		super.paintComponent(g);
+		if (cells == null)
+			for (BoardCell c : cells) {
+				c.draw(g);
+			}
+	}
+	
+	
+	public static void main(String [] args){
+		// TODO Stuff?
+	}
+	
+	// -------------------------------------------------------------------------
+	// MAIN BOARD FUNCTIONS
 	
 	public Board(String sheetName, String legendFile){
 		this.sheetName = sheetName;

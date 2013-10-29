@@ -1,5 +1,8 @@
 package clueGame;
 
+import java.awt.Color;
+import java.awt.Graphics;
+
 public class RoomCell extends BoardCell {
 	public enum DoorDirection {UP, DOWN, LEFT, RIGHT, NONE}
 	int row, column;
@@ -25,9 +28,27 @@ public class RoomCell extends BoardCell {
 		return doorDirection;
 	}
 	
-	
-/*	public void draw(){
+	@Override
+	public void draw(Graphics g) {
+		g.setColor(Color.gray);
+		g.fillRect(x, y, DIM, DIM);
 		
-	}*/
+		// Draw the door
+		g.setColor(Color.blue);
+		if (doorDirection.equals(DoorDirection.UP)) {
+			g.drawLine(x,y,x+DIM,y);
+			g.drawLine(x,y+1,x+DIM,y+1);
+		} else if (doorDirection.equals(DoorDirection.DOWN)) {
+			g.drawLine(x,y+DIM,x+DIM,y);
+			g.drawLine(x,y+DIM-1,x+DIM,y-1);
+		} else if (doorDirection.equals(DoorDirection.RIGHT)) {
+			g.drawLine(x+DIM,y,x+DIM,y+DIM);
+			g.drawLine(x+DIM-1,y,x+DIM-1,y+DIM);
+		} else if (doorDirection.equals(DoorDirection.LEFT)) {
+			g.drawLine(x,y,x,y+DIM);
+			g.drawLine(x+1,y,x+1,y+DIM);
+		}
+	}
+	
 
 }

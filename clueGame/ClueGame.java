@@ -1,12 +1,15 @@
 package clueGame;
 
+import java.awt.BorderLayout;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
 
-public class ClueGame {
+import javax.swing.JFrame;
+
+public class ClueGame extends JFrame {
 
 	private String playerData;
 	private String cardData;
@@ -17,6 +20,8 @@ public class ClueGame {
 	private Board board;
 	private ArrayList<Card> checkDeck;
 	
+	// ----------------------------------------------------------------
+	
 	public ClueGame(String playerData, String cardData, 
 			String sheetName, String legendFile){
 		this.playerData = playerData;
@@ -24,6 +29,11 @@ public class ClueGame {
 		// Don't forget to make the board!
 		board = new Board(sheetName, legendFile);
 		board.loadConfigFiles();
+		
+		// ----------------------------------------------------------------
+		// The GUI part is here
+		add(board, BorderLayout.NORTH);
+		setSize(800,800);
 	}
 	
 	public char passRoomInformation(int index){

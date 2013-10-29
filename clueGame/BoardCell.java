@@ -1,8 +1,11 @@
 package clueGame;
 
+import java.awt.Graphics;
+
 public abstract class BoardCell {
 	
-	private int row, column;
+	protected int row, column, x, y;
+	protected static int DIM = 100;
 	String cell;
 	char roomInitial;
 	public BoardCell(int row, int column, String cell){
@@ -11,8 +14,13 @@ public abstract class BoardCell {
 		this.cell = cell;
 		char[] cellInit = cell.toCharArray();
 		roomInitial = cellInit[0];
+		
+		// For drawing
+		x = DIM*column;
+		y = DIM*row;
 	}
 	
+	public abstract void draw(Graphics g);
 	
 	public boolean isWalkway(){
 		if(roomInitial == 'W')
@@ -21,7 +29,6 @@ public abstract class BoardCell {
 	}
 	
 	public boolean isRoom(){
-		// LOOK AT THIS LINE // -- LINE 24 --------------------------------
 		if((cell.length() == 1 && (roomInitial != 'W')) || cell.length() == 2)
 			return true;
 		return false;

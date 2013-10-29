@@ -3,10 +3,12 @@ import javax.swing.*;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 
+import clueGame.Board;
+
 import java.awt.*;
 import java.awt.event.*;
 import java.util.*;
-public class ClueControlGUI
+public class ClueControlGUI extends JFrame
 {
 	JFrame frame;
 	JLabel guessLabel, responseLabel, playerLabel, dieRollLabel;
@@ -14,10 +16,11 @@ public class ClueControlGUI
 	JButton nextPlayerButton, accuseButton;
 	JMenuBar menuBar;
 	Box b1, b2, b3, b4, clueButtonBox, guessBox, guessBox2;
-	public static void main(String [] args)
-	{if (JOptionPane.showConfirmDialog(null, "Want to play Clue?", "Choose one", JOptionPane.YES_NO_OPTION) == 0)
-	{ClueControlGUI amain = new ClueControlGUI();
-	amain.run();}
+	
+	public static void main(String [] args){
+		if (JOptionPane.showConfirmDialog(null, "Want to play Clue?", "Choose one", JOptionPane.YES_NO_OPTION) == 0) {
+			ClueControlGUI amain = new ClueControlGUI();
+			amain.run();}
 	}
 
 	class nextPlayerListener implements ActionListener{
@@ -77,7 +80,6 @@ public class ClueControlGUI
 		buttonPanel.add(accuseButton);
 		frame.add(BorderLayout.SOUTH, buttonPanel);
 		///////////////////////////////////////////////////////
-
 
 		guessBox2 = new Box(BoxLayout.X_AXIS);
 		guessBox2.add(Box.createRigidArea(new Dimension(0,15)));
