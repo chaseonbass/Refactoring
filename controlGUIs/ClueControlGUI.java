@@ -8,7 +8,7 @@ import clueGame.Board;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.*;
-public class ClueControlGUI extends JFrame
+public class ClueControlGUI extends JPanel
 {
 	JFrame frame;
 	JLabel guessLabel, responseLabel, playerLabel, dieRollLabel;

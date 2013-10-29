@@ -1,12 +1,13 @@
 package clueGame;
 
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Random;
 
 public class Player {
 
 	private String name;
-	private String color;
+	private Color color;
 	private int startingLocation;
 
 	private ArrayList<Card> myCards;
@@ -16,7 +17,7 @@ public class Player {
 		myCards = new ArrayList<Card>();
 	}
 	
-	public Player(String n, String c, int s){
+	public Player(String n, Color c, int s){
 		name = n;
 		color = c;
 		startingLocation = s;
@@ -52,7 +53,7 @@ public class Player {
 		return name;
 	}
 
-	public String getColor() {
+	public Color getColor() {
 		return color;
 	}
 	

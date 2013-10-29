@@ -2,6 +2,7 @@ package boardTests;
 
 import static org.junit.Assert.*;
 
+import java.awt.Color;
 import java.util.ArrayList;
 
 import org.junit.Before;
@@ -263,7 +264,7 @@ public class GameActionTests {
 	@Test
 	public void testAllQueriedToDisprove(){
 		// Make test players
-		HumanPlayer player = new HumanPlayer("Miss Scarlet", "Red", 0);
+		HumanPlayer player = new HumanPlayer("Miss Scarlet", Color.red, 0);
 		ComputerPlayer com1 = new ComputerPlayer();
 		ComputerPlayer com2 = new ComputerPlayer();
 		ComputerPlayer com3 = new ComputerPlayer();

@@ -1,5 +1,6 @@
 package clueGame;
 
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
@@ -24,7 +25,7 @@ public class ComputerPlayer extends Player{
 		seen = new ArrayList<Card>();
 	}
 	
-	public ComputerPlayer(String n, String c, int s) {
+	public ComputerPlayer(String n, Color c, int s) {
 		super(n, c, s);
 		seen = new ArrayList<Card>();
 	}
