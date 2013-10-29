@@ -59,7 +59,7 @@ public class ComputerPlayer extends Player{
 
 	
 	public Suggestion makeSuggestion(String roomName){
-		Suggestion sol;
+		//Suggestion sol;
 		//Cannot be in hand
 		//Cannot be from seen
 		ArrayList<Card> al = new ArrayList<Card>();

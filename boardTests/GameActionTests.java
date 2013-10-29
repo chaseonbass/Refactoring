@@ -391,8 +391,8 @@ public class GameActionTests {
 			p2.addCard(loungeCard);
 			p2.addCard(fruitcakeCard);
 
-			//					Solution s = new Solution(conservCard.getName(), masterCard.getName(), plumCard.getName() );
-			//					game.setSolution(s);
+			//	Solution s = new Solution(conservCard.getName(), masterCard.getName(), plumCard.getName() );
+			//	game.setSolution(s);
 
 			players2.add(cp2);
 			players2.add(p2);
