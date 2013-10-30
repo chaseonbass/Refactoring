@@ -181,7 +181,7 @@ public class ClueGame extends JPanel {
 	}
 
 	public void selectAnswer(){
-
+		
 	}
 
 	public Card handleSuggestion(Card suspect, Card weapon, Card room, Player suggester){

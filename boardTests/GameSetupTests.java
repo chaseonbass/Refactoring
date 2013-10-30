@@ -2,6 +2,7 @@ package boardTests;
 
 import static org.junit.Assert.*;
 
+import java.awt.Color;
 import java.util.ArrayList;
 
 import org.junit.BeforeClass;
@@ -28,9 +29,9 @@ public class GameSetupTests {
 		assertEquals(game.getPlayers().get(0).getName(),"Miss Scarlet");
 		assertEquals(game.getPlayers().get(1).getName(),"Colonel Mustard");
 		assertEquals(game.getPlayers().get(4).getName(),"Professor Plum");
-		assertEquals(game.getPlayers().get(0).getColor(),"red");
-		assertEquals(game.getPlayers().get(1).getColor(),"yellow");
-		assertEquals(game.getPlayers().get(4).getColor(),"purple");
+		assertEquals(game.getPlayers().get(0).getColor(),Color.red);
+		assertEquals(game.getPlayers().get(1).getColor(),Color.yellow);
+		assertEquals(game.getPlayers().get(4).getColor(),game.convertColor("purple"));
 		assertEquals(game.getPlayers().get(0).getStartingLocation() , 7);
 		assertEquals(game.getPlayers().get(1).getStartingLocation() , 296);
 		assertEquals(game.getPlayers().get(4).getStartingLocation() , 18);
