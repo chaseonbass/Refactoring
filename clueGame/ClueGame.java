@@ -11,10 +11,11 @@ import java.util.Collections;
 import java.util.Scanner;
 
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 import controlGUIs.ClueControlGUI;
 
-public class ClueGame extends JFrame {
+public class ClueGame extends JPanel {
 
 	private String playerData;
 	private String cardData;
@@ -41,24 +42,24 @@ public class ClueGame extends JFrame {
 		// The GUI part is here
 		
 		setSize(new Dimension(500, 500));
-		setTitle("The Game of Clue");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		//setTitle("The Game of Clue");
+		//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		add(board, BorderLayout.CENTER);
-		ClueControlGUI control = new ClueControlGUI();
-		add(control, BorderLayout.SOUTH);
+		//ClueControlGUI control = new ClueControlGUI();
+		//add(control, BorderLayout.SOUTH);
 	}
 
-	public static void main(String [] args){
-		ClueGame game = new ClueGame("PlayerData.txt", "cardConfig.txt", "BoardLayout.csv", "legend.txt");
-		game.setVisible(true);
-		game.loadConfigFiles();
-		game.deal();
+	//public static void main(String [] args){
+		//ClueGame game = new ClueGame("PlayerData.txt", "cardConfig.txt", "BoardLayout.csv", "legend.txt");
+		//game.setVisible(true);
+		//game.loadConfigFiles();
+		//game.deal();
 
 		//Board board = game.getBoard();
 		//board.calcAdjacencies();
-		game.repaint();
+		//game.repaint();
 		//board.repaint();
-	}
+	//}
 	
 	// -------------------------------------------------------------------------------------------
 
