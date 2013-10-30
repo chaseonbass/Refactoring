@@ -11,6 +11,7 @@ import java.util.Collections;
 import java.util.Scanner;
 
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 import controlGUIs.ClueControlGUI;
 
@@ -42,7 +43,8 @@ public class ClueGame extends JFrame {
 		// ----------------------------------------------------------------
 		// The GUI part is here
 		
-		setSize(new Dimension(board.getNumRows() * BoardCell.DIM, board.getNumColumns() * BoardCell.DIM + 150));
+		//setSize(new Dimension(board.getNumRows() * BoardCell.DIM, board.getNumColumns() * BoardCell.DIM + 150));
+		setSize(new Dimension(900, 600));
 		setTitle("The Game of Clue");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		add(BorderLayout.CENTER, board);
@@ -179,7 +181,7 @@ public class ClueGame extends JFrame {
 	}
 
 	public void selectAnswer(){
-
+		
 	}
 
 	public Card handleSuggestion(Card suspect, Card weapon, Card room, Player suggester){

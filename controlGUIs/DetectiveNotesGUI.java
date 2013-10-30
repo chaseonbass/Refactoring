@@ -21,21 +21,16 @@ import clueGame.BadConfigFormatException;
 public class DetectiveNotesGUI extends JFrame {
 	
 	private ArrayList<JCheckBox> suspectsCB, roomsCB, weaponsCB;
-	private ArrayList<JLabel> suspectsL, roomsL, weaponsL;
 	private JComboBox<String> suspects, rooms, weapons;
 	
 	public DetectiveNotesGUI(String cardConfigFile) {
-		setSize(new Dimension(400, 500));
+		setSize(new Dimension(650, 450));
 		setTitle("Detective Notes for Clue");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		suspectsCB = new ArrayList<JCheckBox>();
 		roomsCB = new ArrayList<JCheckBox>();
 		weaponsCB = new ArrayList<JCheckBox>();
-		
-		suspectsL = new ArrayList<JLabel>();
-		weaponsL = new ArrayList<JLabel>();
-		roomsL = new ArrayList<JLabel>();
 		
 		suspects = new JComboBox<String>();
 		weapons = new JComboBox<String>();
@@ -52,15 +47,12 @@ public class DetectiveNotesGUI extends JFrame {
 				String[] typeAndName = in.nextLine().split(", ");
 				if (typeAndName[0].equals("SUSPECT")) {
 					suspectsCB.add(new JCheckBox(typeAndName[1]));
-					suspectsL.add(new JLabel(typeAndName[1]));
 					suspects.addItem(typeAndName[1]);
 				} else if (typeAndName[0].equals("WEAPON")) {
 					weaponsCB.add(new JCheckBox(typeAndName[1]));
-					weaponsL.add(new JLabel(typeAndName[1]));
 					weapons.addItem(typeAndName[1]);
 				} else if (typeAndName[0].equals("ROOM")) {
 					roomsCB.add(new JCheckBox(typeAndName[1]));
-					roomsL.add(new JLabel(typeAndName[1]));
 					rooms.addItem(typeAndName[1]);
 				}
 			}
@@ -70,10 +62,9 @@ public class DetectiveNotesGUI extends JFrame {
 		
 		class SuspectPanel extends JPanel {
 			public SuspectPanel() {
-			//setLayout(new GridLayout(2, 0));
+			setLayout(new GridLayout(suspectsCB.size() / 2, 0));
 			
 			for (int i = 0; i < suspectsCB.size(); i++) {
-				add(suspectsL.get(i));
 				add(suspectsCB.get(i));
 			}
 			setBorder(new TitledBorder (new EtchedBorder(), "Suspects"));
@@ -82,6 +73,7 @@ public class DetectiveNotesGUI extends JFrame {
 		
 		class SuspectGuessPanel extends JPanel {
 			public SuspectGuessPanel() {
+				setLayout(new GridLayout(1,0));
 				add(suspects);
 				setBorder(new TitledBorder (new EtchedBorder(), "Suspect Guess"));
 			}
@@ -89,10 +81,9 @@ public class DetectiveNotesGUI extends JFrame {
 		
 		class RoomPanel extends JPanel {
 			public RoomPanel() {
-				//setLayout(new GridLayout(2, 0));
+				setLayout(new GridLayout(roomsCB.size() / 2, 0));
 				
 				for (int i = 0; i < roomsCB.size(); i++) {
-					add(roomsL.get(i));
 					add(roomsCB.get(i));
 				}
 				setBorder(new TitledBorder (new EtchedBorder(), "Rooms"));
@@ -101,6 +92,7 @@ public class DetectiveNotesGUI extends JFrame {
 		
 		class RoomGuessPanel extends JPanel {
 			public RoomGuessPanel() {
+				setLayout(new GridLayout(1,0));
 				add(rooms);
 				setBorder(new TitledBorder (new EtchedBorder(), "Room Guess"));
 			}
@@ -108,10 +100,9 @@ public class DetectiveNotesGUI extends JFrame {
 
 		class WeaponPanel extends JPanel {
 			public WeaponPanel() {
-				//setLayout(new GridLayout(2, 0));
+				setLayout(new GridLayout(weaponsCB.size(), 0));
 				
 				for (int i = 0; i < weaponsCB.size(); i++) {
-					add(weaponsL.get(i));
 					add(weaponsCB.get(i));
 				}
 				setBorder(new TitledBorder (new EtchedBorder(), "Weapons"));
@@ -120,6 +111,7 @@ public class DetectiveNotesGUI extends JFrame {
 		
 		class WeaponGuessPanel extends JPanel {
 			public WeaponGuessPanel() {
+				setLayout(new GridLayout(1,0));
 				add(weapons);
 				setBorder(new TitledBorder (new EtchedBorder(), "Weapon Guess"));
 			}
@@ -133,21 +125,14 @@ public class DetectiveNotesGUI extends JFrame {
 		RoomGuessPanel roomGuessPanel = new RoomGuessPanel();
 		WeaponGuessPanel weaponGuessPanel = new WeaponGuessPanel();
 		
-		JPanel top = new JPanel();
-		top.add(BorderLayout.WEST, suspectPanel);
-		top.add(BorderLayout.EAST, suspectGuessPanel);
+		setLayout(new GridLayout(3,2));
 		
-		JPanel middle = new JPanel();
-		middle.add(BorderLayout.WEST, roomPanel);
-		middle.add(BorderLayout.EAST, roomGuessPanel);
-		
-		JPanel bottom = new JPanel();
-		bottom.add(BorderLayout.WEST, weaponPanel);
-		bottom.add(BorderLayout.EAST, weaponGuessPanel);
-		
-		add(BorderLayout.NORTH, top);
-		add(BorderLayout.CENTER, middle);
-		add(BorderLayout.SOUTH, bottom);
+		add(suspectPanel);
+		add(suspectGuessPanel);
+		add(roomPanel);
+		add(roomGuessPanel);
+		add(weaponPanel);
+		add(weaponGuessPanel);
 	}
 	
 	public static void main(String[] args) {

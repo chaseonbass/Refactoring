@@ -28,7 +28,7 @@ public class Board extends JPanel {
 		if (cells != null)
 			for (BoardCell c : cells) {
 				c.draw(g);
-				repaint();
+				//repaint();
 			}
 	}
 	
