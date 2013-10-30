@@ -1,6 +1,7 @@
 package clueGame;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 
 public class RoomCell extends BoardCell {
@@ -9,6 +10,7 @@ public class RoomCell extends BoardCell {
 	String cell;
 	DoorDirection doorDirection;
 	char roomInitial;
+	boolean roomNameSpot = false;
 	public RoomCell(int row, int column, String cell){
 		super(row, column, cell);
 		if(isDoorway()){
@@ -23,9 +25,20 @@ public class RoomCell extends BoardCell {
 			else
 				doorDirection = DoorDirection.NONE;
 		}
+		if (cell.length() > 1)
+			if (cell.toCharArray()[1] == 'N')
+				roomNameSpot = true;
 	}
 	public DoorDirection getDoorDirection(){
 		return doorDirection;
+	}
+	
+	@Override
+	public void drawRoom(Graphics g, String string) {
+		if(roomNameSpot) {
+			g.setFont(new Font("default", Font.BOLD, 16));
+			g.drawString(string,x,y+DIM);
+		}
 	}
 
 	@Override
@@ -63,4 +76,5 @@ public class RoomCell extends BoardCell {
 			g.drawRect(x, y, DIM, DIM);
 		}
 	}
+	
 }

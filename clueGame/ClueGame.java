@@ -37,18 +37,15 @@ public class ClueGame extends JFrame {
 		// Don't forget to make the board!
 		board = new Board(sheetName, legendFile);
 		board.loadConfigFiles();
-		// Does this need to happen??
 		board.calcAdjacencies();
 
 		// ----------------------------------------------------------------
 		// The GUI part is here
 		
-		//setSize(new Dimension(board.getNumRows() * BoardCell.DIM, board.getNumColumns() * BoardCell.DIM + 150));
-		setSize(new Dimension(900, 600));
+		setSize(new Dimension(900, 700));
 		setTitle("The Game of Clue");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		add(BorderLayout.CENTER, board);
-		// THIS LINE IS THE PROBLEM -- LINE 49
 		control = new ClueControlGUI();
 		add(BorderLayout.SOUTH, control);
 	}

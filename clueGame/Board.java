@@ -26,9 +26,12 @@ public class Board extends JPanel {
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		if (cells != null)
-			for (BoardCell c : cells) {
+			for (BoardCell c : cells)
 				c.draw(g);
-				//repaint();
+			// Repeat to draw names OVER the other squares
+			for (BoardCell c : cells) {
+				if (c.isRoom())
+					c.drawRoom(g, rooms.get(c.getInitial()));
 			}
 	}
 	

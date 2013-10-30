@@ -5,7 +5,7 @@ import java.awt.Graphics;
 public abstract class BoardCell {
 	
 	protected int row, column, x, y;
-	protected static int DIM = 20;
+	protected static int DIM = 25;
 	String cell;
 	char roomInitial;
 	public BoardCell(int row, int column, String cell){
@@ -21,7 +21,7 @@ public abstract class BoardCell {
 	}
 	
 	public abstract void draw(Graphics g);
-	
+	public abstract void drawRoom(Graphics g, String string);
 	public boolean isWalkway(){
 		if(roomInitial == 'W')
 			return true;
@@ -44,5 +44,7 @@ public abstract class BoardCell {
 	public char getInitial(){
 		return roomInitial;
 	}
+
+	
 
 }

@@ -20,4 +20,10 @@ public class WalkwayCell extends BoardCell{
 		g.setColor(Color.black);
 		g.drawRect(x, y, DIM, DIM);
 	}
+
+	@Override
+	public void drawRoom(Graphics g, String string) {
+		// TODO Auto-generated method stub
+		
+	}
 }
