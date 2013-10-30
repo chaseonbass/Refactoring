@@ -19,6 +19,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 
 import controlGUIs.ClueControlGUI;
+import controlGUIs.DetectiveNotesGUI;
 
 public class ClueGame extends JFrame {
 
@@ -33,6 +34,7 @@ public class ClueGame extends JFrame {
 	
 	private ClueControlGUI control;
 	private JMenuBar menuBar;
+	private DetectiveNotesGUI detectiveNotes;
 
 	// ----------------------------------------------------------------
 
@@ -47,6 +49,9 @@ public class ClueGame extends JFrame {
 
 		// ----------------------------------------------------------------
 		// The GUI part is here
+
+		detectiveNotes = new DetectiveNotesGUI("cardConfig.txt");
+		detectiveNotes.setVisible(true);
 		
 		setSize(new Dimension(900, 720));
 		setTitle("The Game of Clue");
@@ -64,6 +69,7 @@ public class ClueGame extends JFrame {
 	private JMenu createFileMenu(){
 		JMenu menu = new JMenu("File"); 
 		menu.add(createFileExitItem());
+		menu.add(createFileShowItem());
 		return menu;
 	}
 	
@@ -74,6 +80,19 @@ public class ClueGame extends JFrame {
 			public void actionPerformed(ActionEvent e)
 			{
 				System.exit(0);
+			}
+		}
+		item.addActionListener(new MenuItemListener());
+		return item;
+	}
+	
+	private JMenuItem createFileShowItem(){
+		JMenuItem item = new JMenuItem("Show Notes");
+		class MenuItemListener implements ActionListener {
+			@Override
+			public void actionPerformed(ActionEvent e)
+			{
+				detectiveNotes.setVisible(true);
 			}
 		}
 		item.addActionListener(new MenuItemListener());

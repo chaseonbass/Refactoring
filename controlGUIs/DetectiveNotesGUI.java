@@ -26,7 +26,7 @@ public class DetectiveNotesGUI extends JFrame {
 	public DetectiveNotesGUI(String cardConfigFile) {
 		setSize(new Dimension(650, 450));
 		setTitle("Detective Notes for Clue");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		suspectsCB = new ArrayList<JCheckBox>();
 		roomsCB = new ArrayList<JCheckBox>();
