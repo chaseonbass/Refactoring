@@ -3,6 +3,8 @@ package clueGame;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.lang.reflect.Field;
@@ -11,6 +13,9 @@ import java.util.Collections;
 import java.util.Scanner;
 
 import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 
 import controlGUIs.ClueControlGUI;
@@ -27,6 +32,7 @@ public class ClueGame extends JFrame {
 	private ArrayList<Card> checkDeck;
 	
 	private ClueControlGUI control;
+	private JMenuBar menuBar;
 
 	// ----------------------------------------------------------------
 
@@ -42,12 +48,36 @@ public class ClueGame extends JFrame {
 		// ----------------------------------------------------------------
 		// The GUI part is here
 		
-		setSize(new Dimension(900, 700));
+		setSize(new Dimension(900, 720));
 		setTitle("The Game of Clue");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		add(BorderLayout.CENTER, board);
 		control = new ClueControlGUI();
 		add(BorderLayout.SOUTH, control);
+		
+		
+		menuBar = new JMenuBar();
+		setJMenuBar(menuBar);
+		menuBar.add(createFileMenu());
+	}
+	
+	private JMenu createFileMenu(){
+		JMenu menu = new JMenu("File"); 
+		menu.add(createFileExitItem());
+		return menu;
+	}
+	
+	private JMenuItem createFileExitItem(){
+		JMenuItem item = new JMenuItem("Exit");
+		class MenuItemListener implements ActionListener {
+			@Override
+			public void actionPerformed(ActionEvent e)
+			{
+				System.exit(0);
+			}
+		}
+		item.addActionListener(new MenuItemListener());
+		return item;
 	}
 
 	public static void main(String [] args){

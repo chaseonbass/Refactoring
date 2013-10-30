@@ -9,6 +9,8 @@ public class Player {
 	private String name;
 	private Color color;
 	private int startingLocation;
+	
+	private int x, y;
 
 	private ArrayList<Card> myCards;
 	
@@ -22,6 +24,9 @@ public class Player {
 		color = c;
 		startingLocation = s;
 		myCards = new ArrayList<Card>();
+		
+		// for drawing
+		
 	}
 	
 	public Card disproveSuggestion(Card suspect, Card weapon, Card room){
