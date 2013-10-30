@@ -24,6 +24,8 @@ public class ClueGame extends JFrame {
 
 	private Board board;
 	private ArrayList<Card> checkDeck;
+	
+	private ClueControlGUI control;
 
 	// ----------------------------------------------------------------
 
@@ -40,12 +42,13 @@ public class ClueGame extends JFrame {
 		// ----------------------------------------------------------------
 		// The GUI part is here
 		
-		setSize(new Dimension(500, 500));
+		setSize(new Dimension(board.getNumRows() * BoardCell.DIM, board.getNumColumns() * BoardCell.DIM + 150));
 		setTitle("The Game of Clue");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		add(board, BorderLayout.CENTER);
-		ClueControlGUI control = new ClueControlGUI();
-		add(control, BorderLayout.SOUTH);
+		add(BorderLayout.CENTER, board);
+		// THIS LINE IS THE PROBLEM -- LINE 49
+		control = new ClueControlGUI();
+		add(BorderLayout.SOUTH, control);
 	}
 
 	public static void main(String [] args){
@@ -53,11 +56,7 @@ public class ClueGame extends JFrame {
 		game.setVisible(true);
 		game.loadConfigFiles();
 		game.deal();
-
-		//Board board = game.getBoard();
-		//board.calcAdjacencies();
 		game.repaint();
-		//board.repaint();
 	}
 	
 	// -------------------------------------------------------------------------------------------
