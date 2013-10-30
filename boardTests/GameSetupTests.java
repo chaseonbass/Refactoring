@@ -31,7 +31,7 @@ public class GameSetupTests {
 		assertEquals(game.getPlayers().get(4).getName(),"Professor Plum");
 		assertEquals(game.getPlayers().get(0).getColor(),Color.red);
 		assertEquals(game.getPlayers().get(1).getColor(),Color.yellow);
-		assertEquals(game.getPlayers().get(4).getColor(),game.convertColor("purple"));
+		assertEquals(game.getPlayers().get(4).getColor(),Color.magenta);
 		assertEquals(game.getPlayers().get(0).getStartingLocation() , 7);
 		assertEquals(game.getPlayers().get(1).getStartingLocation() , 296);
 		assertEquals(game.getPlayers().get(4).getStartingLocation() , 18);

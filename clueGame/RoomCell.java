@@ -11,6 +11,7 @@ public class RoomCell extends BoardCell {
 	DoorDirection doorDirection;
 	char roomInitial;
 	boolean roomNameSpot = false;
+	
 	public RoomCell(int row, int column, String cell){
 		super(row, column, cell);
 		if(isDoorway()){
@@ -29,6 +30,7 @@ public class RoomCell extends BoardCell {
 			if (cell.toCharArray()[1] == 'N')
 				roomNameSpot = true;
 	}
+	
 	public DoorDirection getDoorDirection(){
 		return doorDirection;
 	}

@@ -38,8 +38,7 @@ public class ClueGame extends JFrame {
 
 	// ----------------------------------------------------------------
 
-	public ClueGame(String playerData, String cardData, 
-			String sheetName, String legendFile){
+	public ClueGame(String playerData, String cardData, String sheetName, String legendFile){
 		this.playerData = playerData;
 		this.cardData = cardData;
 		// Don't forget to make the board!
@@ -51,7 +50,7 @@ public class ClueGame extends JFrame {
 		// The GUI part is here
 
 		detectiveNotes = new DetectiveNotesGUI("cardConfig.txt");
-		detectiveNotes.setVisible(true);
+		//detectiveNotes.setVisible(true);
 		
 		setSize(new Dimension(900, 720));
 		setTitle("The Game of Clue");
@@ -67,7 +66,7 @@ public class ClueGame extends JFrame {
 	}
 	
 	private JMenu createFileMenu(){
-		JMenu menu = new JMenu("File"); 
+		JMenu menu = new JMenu("File");
 		menu.add(createFileExitItem());
 		menu.add(createFileShowItem());
 		return menu;
@@ -103,6 +102,7 @@ public class ClueGame extends JFrame {
 		ClueGame game = new ClueGame("PlayerData.txt", "cardConfig.txt", "BoardLayout.csv", "legend.txt");
 		game.setVisible(true);
 		game.loadConfigFiles();
+		game.addPlayersToBoard(game.getPlayers());
 		game.deal();
 		game.repaint();
 	}
@@ -111,6 +111,10 @@ public class ClueGame extends JFrame {
 
 	public char passRoomInformation(int index){
 		return (board.getCellAt(index)).getInitial();
+	}
+	
+	public void addPlayersToBoard(ArrayList<Player> p){
+		board.addPlayers(p);
 	}
 
 	public void deal(){

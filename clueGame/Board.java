@@ -20,12 +20,13 @@ public class Board extends JPanel {
 	private int maxRows, maxColumns;
 	private int numRows, numColumns;
 	private String sheetName, legendFile;
+	private ArrayList<Player> players;
 	
 	// -------------------------------------------------------------------------
 	// BOARD GUI FUNCTIONALITY
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		if (cells != null)
+		if (cells != null){
 			for (BoardCell c : cells)
 				c.draw(g);
 			// Repeat to draw names OVER the other squares
@@ -33,11 +34,19 @@ public class Board extends JPanel {
 				if (c.isRoom())
 					c.drawRoom(g, rooms.get(c.getInitial()));
 			}
+			for(Player p: players){
+				p.draw(g, numColumns);
+			}
+		}
 	}
 	
 	
 	public static void main(String [] args){
 		// TODO Stuff?
+	}
+	
+	public void addPlayers(ArrayList<Player> p){
+		players = p;
 	}
 	
 	// -------------------------------------------------------------------------
@@ -46,6 +55,7 @@ public class Board extends JPanel {
 	public Board(String sheetName, String legendFile){
 		this.sheetName = sheetName;
 		this.legendFile = legendFile;
+		players = new ArrayList<Player>();
 	}
 	public void loadConfigFiles(){
 		try{
