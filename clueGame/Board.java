@@ -25,9 +25,10 @@ public class Board extends JPanel {
 	// BOARD GUI FUNCTIONALITY
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		if (cells == null)
+		if (cells != null)
 			for (BoardCell c : cells) {
 				c.draw(g);
+				repaint();
 			}
 	}
 	

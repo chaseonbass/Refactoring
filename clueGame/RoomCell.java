@@ -27,28 +27,40 @@ public class RoomCell extends BoardCell {
 	public DoorDirection getDoorDirection(){
 		return doorDirection;
 	}
-	
+
 	@Override
 	public void draw(Graphics g) {
-		g.setColor(Color.gray);
-		g.fillRect(x, y, DIM, DIM);
-		
-		// Draw the door
-		g.setColor(Color.blue);
-		if (doorDirection.equals(DoorDirection.UP)) {
-			g.drawLine(x,y,x+DIM,y);
-			g.drawLine(x,y+1,x+DIM,y+1);
-		} else if (doorDirection.equals(DoorDirection.DOWN)) {
-			g.drawLine(x,y+DIM,x+DIM,y);
-			g.drawLine(x,y+DIM-1,x+DIM,y-1);
-		} else if (doorDirection.equals(DoorDirection.RIGHT)) {
-			g.drawLine(x+DIM,y,x+DIM,y+DIM);
-			g.drawLine(x+DIM-1,y,x+DIM-1,y+DIM);
-		} else if (doorDirection.equals(DoorDirection.LEFT)) {
-			g.drawLine(x,y,x,y+DIM);
-			g.drawLine(x+1,y,x+1,y+DIM);
+
+		if (isRoom()) {
+			g.setColor(Color.gray);
+			g.fillRect(x, y, DIM, DIM);
+
+			// Draw the door
+			g.setColor(Color.blue);
+			if (doorDirection != null) {
+				if (doorDirection.equals(DoorDirection.UP)) {
+					g.drawLine(x,y,x+DIM,y);
+					g.drawLine(x,y+1,x+DIM,y+1);
+					g.drawLine(x,y+2,x+DIM,y+2);
+				} else if (doorDirection.equals(DoorDirection.DOWN)) {
+					g.drawLine(x,y+DIM,x+DIM,y+DIM);
+					g.drawLine(x,y+DIM-1,x+DIM,y+DIM-1);
+					g.drawLine(x,y+DIM-2,x+DIM,y+DIM-2);
+				} else if (doorDirection.equals(DoorDirection.RIGHT)) {
+					g.drawLine(x+DIM,y,x+DIM,y+DIM);
+					g.drawLine(x+DIM-1,y,x+DIM-1,y+DIM);
+					g.drawLine(x+DIM-2,y,x+DIM-2,y+DIM);
+				} else if (doorDirection.equals(DoorDirection.LEFT)) {
+					g.drawLine(x,y,x,y+DIM);
+					g.drawLine(x+1,y,x+1,y+DIM);
+					g.drawLine(x+2,y,x+2,y+DIM);
+				}
+			}
+		} else if (isWalkway()) {
+			g.setColor(Color.yellow);
+			g.fillRect(x, y, DIM, DIM);
+			g.setColor(Color.black);
+			g.drawRect(x, y, DIM, DIM);
 		}
 	}
-	
-
 }

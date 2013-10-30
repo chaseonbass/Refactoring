@@ -5,7 +5,7 @@ import java.awt.Graphics;
 public abstract class BoardCell {
 	
 	protected int row, column, x, y;
-	protected static int DIM = 50;
+	protected static int DIM = 20;
 	String cell;
 	char roomInitial;
 	public BoardCell(int row, int column, String cell){

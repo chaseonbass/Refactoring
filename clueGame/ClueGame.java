@@ -44,7 +44,8 @@ public class ClueGame extends JFrame {
 		setTitle("The Game of Clue");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		add(board, BorderLayout.CENTER);
-		add(new ClueControlGUI(), BorderLayout.SOUTH);
+		ClueControlGUI control = new ClueControlGUI();
+		add(control, BorderLayout.SOUTH);
 	}
 
 	public static void main(String [] args){
@@ -58,6 +59,8 @@ public class ClueGame extends JFrame {
 		game.repaint();
 		//board.repaint();
 	}
+	
+	// -------------------------------------------------------------------------------------------
 
 	public char passRoomInformation(int index){
 		return (board.getCellAt(index)).getInitial();
